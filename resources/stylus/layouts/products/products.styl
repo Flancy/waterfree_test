@@ -1,0 +1,76 @@
+.products
+	padding-top 50px
+	.h2
+		margin-bottom 30px
+		font-weight 600
+	.product
+		margin-bottom 30px
+		background-color #ffffff
+		box-shadow 0 4px 8px rgba(0,0,0,0.15)
+		border-radius 8px
+		overflow hidden
+		transition all 0.3s ease-in-out
+		.product-head
+			padding 15px
+			position relative
+			height 280px
+			text-align center
+			.product__liter
+				position absolute
+				top 0
+				left 0
+				padding 5px 14px
+				background-color #35a4dc
+				color #ffffff
+				font-size 14px
+				font-weight 600
+			.product__image
+				max-height 100%
+				display inline-block
+		.product-body
+			padding 0 15px 15px 15px
+			text-align center
+			.product__title
+				font-size 22px
+				font-weight 700
+				margin-bottom 15px
+			.product__price
+				margin-bottom 5px
+				padding 8px 20px
+				display inline-block
+				background-color #35a4dc
+				font-weight 500
+				line-height 1
+				font-size 18px
+				color #ffffff
+				border-radius 20px
+		.product-foot
+			font-size 0
+			text-align center
+			.btn
+				display inline-block
+				width 50%
+				padding 15px 10px
+				background-color transparent
+				border 1px solid #35a4dc
+				color #35a4dc
+				border-radius 0
+				font-weight 500
+				font-size 16px
+				transition all 0.3s ease-in-out
+				&:first-of-type
+					border-bottom-left-radius 8px
+					border-right none
+					&:hover, &:active 
+						background-color #35a4dc
+						color #ffffff
+				&:last-of-type
+					border-bottom-right-radius 8px
+					background-color #35a4dc
+					color #ffffff
+					&:hover, &:active 
+						background-color transparent
+						color #35a4dc
+		&:hover, &:active
+			box-shadow 0 8px 22px rgba(0,0,0,0.15)
+	

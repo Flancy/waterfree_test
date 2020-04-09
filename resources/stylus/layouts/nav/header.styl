@@ -1,0 +1,86 @@
+.topbar
+	background-color #ffffff
+	border-bottom 1px solid rgba(0,0,0,0.1)
+	.nav-link
+		color #212121
+		font-weight 600
+		font-size 14px
+		transition color 0.3s ease-in-out
+		.fa
+			display inline-block
+			vertical-align middle
+			color #35a4dc
+			font-size 16px
+		span
+			display inline-block
+			vertical-align middle
+			padding-left 5px
+			padding-right 5px
+			font-weight 700
+		&:hover, &:active
+			text-decoration underline
+			color #35a4dc
+		&#navbarCity:hover, &navbarCity:active
+			text-decoration none
+	.dropdown-toggle::after
+		display none
+	.col-sm-6 .row
+		margin-left 0
+		margin-right 0
+	.topbar-social
+		display flex
+		align-items center
+		a
+			text-decoration none !important
+			font-size 18px
+			color #212121
+			margin 0 8px
+			transition color 0.3s ease-in-out
+			&:hover, &:active
+				color #35a4dc
+	.topbar-phone
+		a
+			color #212121
+			transition color 0.3s ease-in-out
+			font-weight 700
+			line-height 1
+			.fab
+				color #35a4dc
+				vertical-align sub
+				margin-right 3px
+			&:hover, &:active
+				text-decoration none
+	.navbar-nav
+		flex-direction row
+		.nav-link
+			padding-right 0.5rem
+			padding-left 0.5rem
+			.fa
+				color #35a4dc
+				vertical-align baseline
+				margin-right 3px
+	#navbarCity
+		.fa
+			vertical-align middle
+.navbar
+	background-color #ffffff
+	.navbar-brand
+		.img-fluid
+			max-height 40px
+	.nav-link
+		color #212121
+		font-weight 700
+		transition color 0.3s ease-in-out
+		&:hover, &:active
+			text-decoration underline
+			color #35a4dc
+[aria-labelledby="navbarCity"]
+	max-height 400px
+	overflow auto
+[aria-labelledby="navbarCart"] a:last-of-type
+	text-decoration underline
+	text-align center
+	background-color #3490dc
+	color #ffffff
+	&:hover, &:active
+		text-decoration none

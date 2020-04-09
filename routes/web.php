@@ -1,0 +1,103 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+//Смена города
+Route::get('/set_citie/{city}', function ($city) {
+    Session::put('city', $city);
+
+    return redirect()->back();
+})->name('set_citie');
+
+Auth::routes();
+
+Route::get('/code', 'Auth\RegisterController@showCodeForm')->name('code');
+Route::post('/code', 'Auth\RegisterController@storeCodeForm');
+
+Route::get('/register_city', 'Auth\RegisterController@showRegistrationCityForm')->name('register_city');
+
+Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/pages/products', 'HomeController@pageProductIndex')->name('pages.products.index');
+
+//Административная панель
+Route::group([
+		'middleware' => ['admin', 'web', 'auth'], 
+		'namespace' => 'Admin',
+		'prefix' => 'admin',
+		'as' => 'admin.'
+	], function () {
+	Route::get('/', 'HomeController@index')->name('home');
+
+	//Пользователи
+	Route::get('/users', 'Users\UsersController@index')->name('users.index');
+	Route::get('/users/{user}', 'Users\UsersController@show')->name('users.show');
+	Route::put('/users/{user}', 'Users\UsersController@update')->name('users.update');
+	Route::delete('/users/{user}', 'Users\UsersController@destroy')->name('users.destroy');
+
+	//Фирмы
+	Route::get('/firms', 'Firms\FirmsController@index')->name('firms.index');
+	Route::get('/firms/{firm}', 'Firms\FirmsController@show')->name('firms.show');
+	Route::post('/firms', 'Firms\FirmsController@store')->name('firms.store');
+	Route::put('/firms/{firm}', 'Firms\FirmsController@update')->name('firms.update');
+	Route::delete('/firms/{firm}', 'Firms\FirmsController@destroy')->name('firms.destroy');
+
+	//Фирмы (Удаление города)
+	Route::delete('/firms/{firm}/{city}', 'Firms\FirmsController@destroyCity')->name('firms.destroyCity');
+
+	//Фирмы (Подключение городов)
+	Route::post('/firms/{firm}/add-city', 'Firms\FirmsController@storeCity')->name('firms.storeCity');
+
+	//Города
+	Route::get('/cities', 'Cities\CitiesController@index')->name('cities.index');
+	Route::get('/cities/{city}', 'Cities\CitiesController@show')->name('cities.show');
+	Route::post('/cities', 'Cities\CitiesController@store')->name('cities.store');
+	Route::put('/cities/{city}', 'Cities\CitiesController@update')->name('cities.update');
+	Route::delete('/cities/{city}', 'Cities\CitiesController@destroy')->name('cities.destroy');
+	//Фирмы (Удаление города)
+	Route::delete('/cities/{firm}/{city}', 'Cities\CitiesController@destroyFirm')->name('cities.destroyFirm');
+
+	//Товары
+	Route::get('/products', 'Products\ProductsController@index')->name('products.index');
+	Route::get('/products/{product}', 'Products\ProductsController@show')->name('products.show');
+	Route::post('/products', 'Products\ProductsController@store')->name('products.store');
+	Route::put('/products/{product}', 'Products\ProductsController@update')->name('products.update');
+	Route::delete('/products/{product}', 'Products\ProductsController@destroy')->name('products.destroy');
+
+	//Товары
+	Route::get('/orders', 'Orders\OrdersController@index')->name('orders.index');
+	Route::get('/orders/{order_group_id}', 'Orders\OrdersController@show')->name('orders.show');
+	Route::put('/orders/{order_group_id}', 'Users\OrdersController@update')->name('orders.update');
+	Route::delete('/orders/{order_group_id}', 'Users\OrdersController@destroy')->name('orders.destroy');
+});
+
+//Корзина
+Route::resource('/cart', 'Cart\CartController');
+Route::post('/cart/order/store', 'Cart\OrderController@store')->name('cart.order.store');
+
+//Товары
+Route::resource('/products', 'Api\ProductsController');
+
+//Пользователь
+Route::group([
+		'middleware' => ['web', 'auth'], 
+		'namespace' => 'User',
+		'as' => 'user.'
+	], function () {
+	//Заказы
+	Route::get('/user/orders', 'OrdersController@index')->name('orders.index');
+	Route::get('/user/orders/{order_group_id}', 'OrdersController@show')->name('orders.show');
+
+	//Настройки
+	Route::get('/user/setting', 'SettingController@index')->name('setting.index');
+	Route::post('/user/setting', 'SettingController@update')->name('setting.update');
+});

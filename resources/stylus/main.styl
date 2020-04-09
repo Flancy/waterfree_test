@@ -1,0 +1,65 @@
+//Шрифты
+@import 'fonts/fonts.css'
+//Плагины
+@import 'plugins/bootstrap-select/bootstrap-select.min.css'
+@import 'plugins/owl-carousel/owl.carousel.min.css'
+@import 'plugins/owl-carousel/owl.theme.default.min.css'
+
+@import 'layouts/admin/nav.styl'
+
+//Пользователи Админка
+@import 'layouts/admin/users/index.styl'
+@import 'layouts/admin/users/show.styl'
+
+//Города Админка
+@import 'layouts/admin/cities/index.styl'
+
+//Фирмы Админка
+@import 'layouts/admin/firms/index.styl'
+@import 'layouts/admin/firms/show.styl'
+
+//Товары Админка
+@import 'layouts/admin/products/index.styl'
+
+//Navbar
+@import 'layouts/nav/header.styl'
+@import 'layouts/nav/footer.styl'
+
+//Аутентификация
+@import 'layouts/auth/auth-form.styl'
+
+//Корзина
+@import 'layouts/cart/navbar-cart.styl'
+@import 'layouts/cart/cart.styl'
+@import 'layouts/cart/modal-order.styl'
+
+//Страницы пользователей
+@import 'layouts/user/nav.styl'
+@import 'layouts/user/setting/index.styl'
+
+//Продукция
+@import 'layouts/products/products.styl'
+@import 'layouts/products/products-nav.styl'
+	
+//Admin All
+#searchAdmin
+	margin-bottom 20px
+	
+body
+	font-family "Raleway", sans-serif
+	.fab, .fas
+		font-family "FontAwesome"
+		font-style normal
+	.fa-trash
+		color red !important
+		&:hover, &:active
+			color #000 !important
+	.btn,
+	input
+		transition all 0.3s ease-in-out
+		border-radius 50rem
+	.bootstrap-select
+		width 100% !important
+	.btn-primary
+		background-color #35a4dc
+		border-color #35a4dc
