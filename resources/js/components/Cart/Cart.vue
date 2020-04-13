@@ -8,7 +8,7 @@
             <a v-for="item in $store.state.cart"
                 :key="item.id"
                 class="dropdown-item dropdown-item-cart"
-                href="#" @click.prevent>
+                href="/cart" @click.prevent>
 
                 <i class="fa fa-trash removeBtn" aria-hidden="true" title="Удалить из корзины" @click.prevent="removeFromCart(item)"></i>
 

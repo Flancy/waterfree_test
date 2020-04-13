@@ -32,11 +32,13 @@ class ProductsController extends Controller
         if(Session::get('city')) {
             $city_id = City::where('name', Session::get('city'))->firstOrFail();
 
-            $products = Products::where($this->query)
+            $products = Products::with(['firms'])
+                ->where($this->query)
                 ->where('city_id', $city_id->id)
                 ->paginate(8);
         } else {
-            $products = Products::where($this->query)
+            $products = Products::with(['firms'])
+                ->where($this->query)
                 ->paginate(8);
         }
 

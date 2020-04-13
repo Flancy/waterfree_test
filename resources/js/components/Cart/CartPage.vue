@@ -37,7 +37,13 @@
                                             </div>
                                         </td>
                                         <td class="align-middle"><strong>{{ item.totalPrice }} <i class="fa fa-rub" aria-hidden="true"></i></strong></td>
-                                        <td class="align-middle"><strong>{{ item.quantity }}</strong></td>
+                                        <td class="align-middle">
+                                            <div class="product-count">
+                                                <span class="minus" @click="minus(item)">-</span>
+                                                <input type="text" min="1" class="product-input" @change="changeCount(item)" v-model="item.quantity">
+                                                <span class="plus" @click="plus(item)">+</span>
+                                            </div>
+                                        </td>
                                         <td class="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash" @click.prevent="removeFromCart(item)"></i></a></td>
                                     </tr>
                                 </tbody>
@@ -101,6 +107,24 @@ export default {
     methods: {
         removeFromCart(item) {
             this.$store.commit('removeFromCart', item);
+        },
+        changeCount(item) {
+            this.$store.commit('changeCount', item);
+        },
+        minus(item) {
+            let count = parseInt(item.quantity) - 1;
+            count = count < 1 ? 1 : count;
+
+            item.quantity = count;
+
+            this.changeCount(item);
+        },
+        plus(item) {
+            let count = parseInt(item.quantity) + 1;
+
+            item.quantity = count;
+            
+            this.changeCount(item);
         }
     }
 }

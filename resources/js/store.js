@@ -37,6 +37,31 @@ let store = {
 
 		    this.commit('saveCart');
 		},
+		changeCount(state, item) {
+			let found = state.cart.find(product => product.id == item.id);
+
+		    if (found) {
+		        found.quantity === item.quantity;
+		        found.totalPrice = found.quantity * found.price;
+		    } else {
+		        state.cart.push(item);
+
+		        Vue.set(item, 'quantity', 1);
+		        Vue.set(item, 'totalPrice', item.price);
+		    }
+
+		    let totalCount = 0;
+
+            for (let item of state.cart) {
+                totalCount += item.quantity;
+            }
+
+            console.log(totalCount);
+
+		    state.cartCount = totalCount;
+
+		    this.commit('saveCart');
+		},
         removeAllCart(state) {
 		    state.cartCount = 0;
 		    state.cart = [];

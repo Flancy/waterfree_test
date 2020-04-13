@@ -45,7 +45,6 @@ class CitiesController extends Controller
 
         $cityData = [
             'name' => $request->name,
-            'slug' => Transliterate::transliterate($request->name),
         ];
 
         City::create($cityData);

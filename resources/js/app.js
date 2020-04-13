@@ -202,5 +202,76 @@ jQuery(document).ready(function($) {
 		$(this).addClass('active');
 
 		return false;
-	})
+	});
+
+	$(document).on('click', '.product-minus', function () {
+        var $input = $(this).parent().find('input');
+        var count = parseInt($input.val()) - 1;
+        count = count < 1 ? 1 : count;
+        $input.val(count);
+
+        $(this).parent('.product-foot').find('.btn-cart').attr('data-count', $input.val());
+
+        $input.change();
+        return false;
+    });
+
+    $(document).on('click', '.product-plus', function () {
+        var $input = $(this).parent().find('input');
+        $input.val(parseInt($input.val()) + 1);
+
+        $(this).parent('.product-foot').find('.btn-cart').attr('data-count', $input.val());
+
+        $input.change();
+        return false;
+    });
+
+    $(document).on('keyup', '.product-input', function () {
+    	var count = parseInt($(this).val());
+    	count = count < 1 ? 1 : count;
+
+    	$(this).parent('.product-foot').find('.btn-cart').attr('data-count', $(this).val());
+    });
+
+    if(window.location.pathname === "/pages/contacts") {
+		ymaps.ready(init);
+	}
 });
+
+function init() {
+    var myMap = new ymaps.Map("map", {
+            center: [46.760702, 54.921726],
+            zoom: 4,
+            controls: ['zoomControl']
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+
+    myMap.behaviors.disable('scrollZoom');
+
+    myMap.geoObjects
+        .add(new ymaps.Placemark([59.975179, 30.305626], {
+            balloonContent: '<strong>Waterfree</strong><br>Санкт-Петербург</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+        .add(new ymaps.Placemark([45.035470, 38.975313], {
+            balloonContent: '<strong>Waterfree</strong><br>Краснодар</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+        .add(new ymaps.Placemark([45.043330, 41.969101], {
+            balloonContent: '<strong>Waterfree</strong><br>Ставрополь</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+        .add(new ymaps.Placemark([44.228374, 42.048270], {
+            balloonContent: '<strong>Waterfree</strong><br>Черкесск</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }));
+}

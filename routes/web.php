@@ -29,6 +29,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/pages/products', 'HomeController@pageProductIndex')->name('pages.products.index');
 
+Route::get('/pages/contacts', 'HomeController@pageContactsIndex')->name('pages.contacts.index');
+
 //Административная панель
 Route::group([
 		'middleware' => ['admin', 'web', 'auth'], 
@@ -93,11 +95,34 @@ Route::group([
 		'namespace' => 'User',
 		'as' => 'user.'
 	], function () {
-	//Заказы
-	Route::get('/user/orders', 'OrdersController@index')->name('orders.index');
-	Route::get('/user/orders/{order_group_id}', 'OrdersController@show')->name('orders.show');
+		Route::group([
+			'middleware' => ['check_customer']
+		], function () {
+			//Заказы
+			Route::get('/user/orders', 'OrdersController@index')->name('orders.index');
+			Route::get('/user/orders/{order_group_id}', 'OrdersController@show')->name('orders.show');
 
-	//Настройки
-	Route::get('/user/setting', 'SettingController@index')->name('setting.index');
-	Route::post('/user/setting', 'SettingController@update')->name('setting.update');
+			//Настройки
+			Route::get('/user/setting', 'SettingController@index')->name('setting.index');
+			Route::post('/user/setting', 'SettingController@update')->name('setting.update');
+		});
+
+		Route::group([
+			'middleware' => ['check_firm']
+		], function () {
+			//Заказы
+			Route::get('/firm/orders', 'Firm\OrdersController@index')->name('firm.orders.index');
+			Route::get('/firm/orders/{order_group_id}', 'Firm\OrdersController@show')->name('firm.orders.show');
+
+			//Настройки
+			Route::get('/firm/setting', 'Firm\SettingController@index')->name('firm.setting.index');
+			Route::post('/firm/setting', 'Firm\SettingController@update')->name('firm.setting.update');
+			//Настройки
+			Route::get('/firm/connect', 'Firm\ConnectController@index')->name('firm.connect.index');
+			Route::post('/firm/connect', 'Firm\ConnectController@update')->name('firm.connect.update');
+
+			//Баланс
+			Route::get('/firm/balance', 'Firm\BalanceController@index')->name('firm.balance.index');
+			Route::post('/firm/balance', 'Firm\BalanceController@update')->name('firm.balance.update');
+		});
 });

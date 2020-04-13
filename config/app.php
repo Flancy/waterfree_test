@@ -175,6 +175,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         Nutnet\LaravelSms\ServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -238,7 +239,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-        
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
     ],
 
 ];

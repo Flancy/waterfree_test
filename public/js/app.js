@@ -2016,6 +2016,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['cities'],
   computed: {
@@ -2051,6 +2057,20 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     removeFromCart: function removeFromCart(item) {
       this.$store.commit('removeFromCart', item);
+    },
+    changeCount: function changeCount(item) {
+      this.$store.commit('changeCount', item);
+    },
+    minus: function minus(item) {
+      var count = parseInt(item.quantity) - 1;
+      count = count < 1 ? 1 : count;
+      item.quantity = count;
+      this.changeCount(item);
+    },
+    plus: function plus(item) {
+      var count = parseInt(item.quantity) + 1;
+      item.quantity = count;
+      this.changeCount(item);
     }
   }
 });
@@ -2210,6 +2230,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2220,7 +2246,8 @@ __webpack_require__.r(__webpack_exports__);
       firm_id: null,
       liter: null,
       query: '',
-      btnText: 'В корзину'
+      btnText: 'В корзину',
+      origin_url: window.location.origin
     };
   },
   mounted: function mounted() {
@@ -2248,7 +2275,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addToCart: function addToCart(product, event) {
-      this.$store.commit('addToCart', product);
+      var value = $(event.target).closest('.product-foot').find('input').val();
+
+      while (value != 0) {
+        console.log(value);
+        this.$store.commit('addToCart', product);
+        value--;
+      }
+
       event.target.innerText = 'Добавлено';
       setTimeout(function () {
         return event.target.innerText = 'В корзину';
@@ -38935,7 +38969,7 @@ var render = function() {
             {
               key: item.id,
               staticClass: "dropdown-item dropdown-item-cart",
-              attrs: { href: "#" },
+              attrs: { href: "/cart" },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -39112,7 +39146,62 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("td", { staticClass: "align-middle" }, [
-                                _c("strong", [_vm._v(_vm._s(item.quantity))])
+                                _c("div", { staticClass: "product-count" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "minus",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.minus(item)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("-")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: item.quantity,
+                                        expression: "item.quantity"
+                                      }
+                                    ],
+                                    staticClass: "product-input",
+                                    attrs: { type: "text", min: "1" },
+                                    domProps: { value: item.quantity },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.changeCount(item)
+                                      },
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          item,
+                                          "quantity",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "plus",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.plus(item)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("+")]
+                                  )
+                                ])
                               ]),
                               _vm._v(" "),
                               _c("td", { staticClass: "align-middle" }, [
@@ -39581,9 +39670,10 @@ var render = function() {
               return _c("div", { key: product.id, staticClass: "col-sm-3" }, [
                 _c("div", { staticClass: "product" }, [
                   _c("div", { staticClass: "product-head" }, [
-                    _c("span", { staticClass: "product__liter" }, [
-                      _vm._v(_vm._s(product.liter) + " л.")
-                    ]),
+                    _c("img", {
+                      staticClass: "product__liter",
+                      attrs: { src: _vm.origin_url + product.firms.logo }
+                    }),
                     _vm._v(" "),
                     _c("img", {
                       staticClass: "img-fluid product__image",
@@ -39606,26 +39696,24 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "product-foot" }, [
-                    _c(
-                      "a",
-                      { staticClass: "btn btn-more", attrs: { href: "#" } },
-                      [_vm._v("Подробнее")]
-                    ),
+                    _vm._m(0, true),
                     _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-cart",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.addToCart(product, $event)
+                    _c("div", { staticClass: "product-btn" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-cart btn-outline-primary",
+                          attrs: { href: "#", "data-count": "1" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.addToCart(product, $event)
+                            }
                           }
-                        }
-                      },
-                      [_vm._v(_vm._s(_vm.btnText))]
-                    )
+                        },
+                        [_vm._v(_vm._s(_vm.btnText))]
+                      )
+                    ])
                   ])
                 ])
               ])
@@ -39645,10 +39733,25 @@ var render = function() {
           ],
           2
         )
-      : _c("div", { staticClass: "row" }, [_vm._m(0)])
+      : _c("div", { staticClass: "row" }, [_vm._m(1)])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-count" }, [
+      _c("span", { staticClass: "product-minus" }, [_vm._v("-")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "product-input",
+        attrs: { type: "text", value: "1", min: "1" }
+      }),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-plus" }, [_vm._v("+")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -54997,7 +55100,64 @@ jQuery(document).ready(function ($) {
     $(this).addClass('active');
     return false;
   });
+  $(document).on('click', '.product-minus', function () {
+    var $input = $(this).parent().find('input');
+    var count = parseInt($input.val()) - 1;
+    count = count < 1 ? 1 : count;
+    $input.val(count);
+    $(this).parent('.product-foot').find('.btn-cart').attr('data-count', $input.val());
+    $input.change();
+    return false;
+  });
+  $(document).on('click', '.product-plus', function () {
+    var $input = $(this).parent().find('input');
+    $input.val(parseInt($input.val()) + 1);
+    $(this).parent('.product-foot').find('.btn-cart').attr('data-count', $input.val());
+    $input.change();
+    return false;
+  });
+  $(document).on('keyup', '.product-input', function () {
+    var count = parseInt($(this).val());
+    count = count < 1 ? 1 : count;
+    $(this).parent('.product-foot').find('.btn-cart').attr('data-count', $(this).val());
+  });
+
+  if (window.location.pathname === "/pages/contacts") {
+    ymaps.ready(init);
+  }
 });
+
+function init() {
+  var myMap = new ymaps.Map("map", {
+    center: [46.760702, 54.921726],
+    zoom: 4,
+    controls: ['zoomControl']
+  }, {
+    searchControlProvider: 'yandex#search'
+  });
+  myMap.behaviors.disable('scrollZoom');
+  myMap.geoObjects.add(new ymaps.Placemark([59.975179, 30.305626], {
+    balloonContent: '<strong>Waterfree</strong><br>Санкт-Петербург</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+  }, {
+    preset: 'islands#icon',
+    iconColor: '#0095b6'
+  })).add(new ymaps.Placemark([45.035470, 38.975313], {
+    balloonContent: '<strong>Waterfree</strong><br>Краснодар</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+  }, {
+    preset: 'islands#icon',
+    iconColor: '#0095b6'
+  })).add(new ymaps.Placemark([45.043330, 41.969101], {
+    balloonContent: '<strong>Waterfree</strong><br>Ставрополь</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+  }, {
+    preset: 'islands#icon',
+    iconColor: '#0095b6'
+  })).add(new ymaps.Placemark([44.228374, 42.048270], {
+    balloonContent: '<strong>Waterfree</strong><br>Черкесск</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+  }, {
+    preset: 'islands#icon',
+    iconColor: '#0095b6'
+  }));
+}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
@@ -58335,6 +58495,49 @@ var store = {
         state.cart.splice(index, 1);
       }
 
+      this.commit('saveCart');
+    },
+    changeCount: function changeCount(state, item) {
+      var found = state.cart.find(function (product) {
+        return product.id == item.id;
+      });
+
+      if (found) {
+        found.quantity === item.quantity;
+        found.totalPrice = found.quantity * found.price;
+      } else {
+        state.cart.push(item);
+        Vue.set(item, 'quantity', 1);
+        Vue.set(item, 'totalPrice', item.price);
+      }
+
+      var totalCount = 0;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = state.cart[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _item = _step.value;
+          totalCount += _item.quantity;
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      console.log(totalCount);
+      state.cartCount = totalCount;
       this.commit('saveCart');
     },
     removeAllCart: function removeAllCart(state) {

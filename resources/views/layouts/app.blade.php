@@ -73,7 +73,7 @@
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                             @if(Auth::user()->role === 2)
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{ route('user.firm.orders.index') }}">
                                                     {{ __('Личный кабинет') }}
                                                 </a>
                                             @elseif(Auth::user()->role === 1)
@@ -105,7 +105,7 @@
         <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/firm_default.svg') }}" alt="" class="img-fluid">
+                    <img src="{{ asset('images/logo.png') }}" alt="" class="img-fluid">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -118,7 +118,7 @@
                             <a href="{{ route('pages.products.index') }}" class="nav-link">Продукция</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Контакты</a>
+                            <a href="{{ route('pages.contacts.index') }}" class="nav-link">Контакты</a>
                         </li>
                         @if(Auth::check() && Auth::user()->role == 0)
                             <li class="nav-item {{ Route::is('admin.home') ? 'active' : '' }}">
@@ -175,6 +175,8 @@
         </footer>
     </div>
     
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=975e872d-c3c6-4768-9569-dc49e52afa62
+&lang=ru_RU" type="text/javascript"></script>
     <script scr="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

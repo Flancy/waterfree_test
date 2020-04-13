@@ -4,7 +4,7 @@
             <div class="col-sm-3" v-for="product in products.data" :key="product.id">
                 <div class="product">
                     <div class="product-head">
-                        <span class="product__liter">{{ product.liter }} л.</span>
+                        <img :src="origin_url + product.firms.logo" class="product__liter">
                         <img :src="product.logo" alt="" class="img-fluid product__image">
                     </div>
                     <div class="product-body">
@@ -12,8 +12,14 @@
                         <p class="product__price">{{ product.price }} <i class="fa fa-rub" aria-hidden="true"></i></p>
                     </div>
                     <div class="product-foot">
-                        <a href="#" class="btn btn-more">Подробнее</a>
-                        <a href="#" class="btn btn-cart" @click.prevent="addToCart(product, $event)">{{ btnText }}</a>
+                        <div class="product-count">
+                            <span class="product-minus">-</span>
+                            <input type="text" value="1" min="1" class="product-input">
+                            <span class="product-plus">+</span>
+                        </div>
+                        <div class="product-btn">
+                            <a href="#" class="btn btn-cart btn-outline-primary" data-count="1" @click.prevent="addToCart(product, $event)">{{ btnText }}</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,7 +47,8 @@ export default {
             firm_id: null,
             liter: null,
             query: '',
-            btnText: 'В корзину'
+            btnText: 'В корзину',
+            origin_url: window.location.origin
         };
     },
     mounted() {
@@ -67,7 +74,14 @@ export default {
                 });
         },
         addToCart(product, event) {
-            this.$store.commit('addToCart', product);
+            let value = $(event.target).closest('.product-foot').find('input').val();
+
+            while (value != 0) {
+                console.log(value);
+                this.$store.commit('addToCart', product);
+
+                value--;
+            }
 
             event.target.innerText = 'Добавлено';
 
