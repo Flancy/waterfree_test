@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Models\CityFirms;
+use App\Models\Products;
 
 class ConnectController extends Controller
 {
@@ -15,16 +16,22 @@ class ConnectController extends Controller
     {
         $user = Auth::user();
 
-        $city_firms = CityFirms::where('city_id', $user->city_id)->with(['firms'])->get();
+        $products = Products::where('city_id', $user->city_id)->get();
+        
+        $collection = collect($products);
+
+        $unique = $collection->unique('order_group_id');
 
     	return view('firm.connect.index')->with([
     		'user' => $user,
-            'city_firms' => $city_firms
+            'products' => $unique
     	]);
     }
 
     public function update(Request $request)
     {
+        dd($request->all());
+
     	return redirect()->back()->with([
     		'message' => 'Данные успешно обновлены!'
     	]);

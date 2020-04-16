@@ -12,16 +12,50 @@
             @include("partials.errors")
             @include("partials.success")
 
-            <form action="" method="POST" class="form-add-city">
-                @csrf
-                <select class="selectpicker mb-3" multiple data-live-search="true" name="city_id[]" data-style="btn-primary">
-                    @foreach($city_firms as $firm)
-                        <option data-tokens="{{ $firm->firms->name }}" value="{{ $firm->firms->id }}">{{ $firm->firms->name }}</option>
-                    @endforeach
-                </select>
+            <input class="form-control" id="searchAdmin" type="text" placeholder="Поиск..">
 
-                <button type="submit" class="btn btn-success">Подключить +</button>
-            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Изображение</th>
+                            <th>Статус подключения</th>
+                            <th>Название</th>
+                            <th>Литраж</th>
+                            <th>Город</th>
+                            <th>Фирма</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($products as $product)
+                            <tr>
+                                <td>{{ $product->id }}</td>
+                                <td><img src="{{ $product->logo }}" class="img-fluid" style="max-height: 100px;"></td>
+                                <td><span class="badge badge-success">Не подключен</span></td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->liter }} л.</td>
+                                <td>{{ $product->cities->name }}</td>
+                                <td>{{ $product->firms->name }}</td>
+                                <td>
+                                    <form action="{{ route('user.firm.connect.update') }}">
+                                        @csrf
+
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                        <input type="hidden" name="city_id" value="{{ $product->city_id }}">
+                                        <input type="hidden" name="firm_id" value="{{ $product->firm_id }}">
+                                        <input type="hidden" name="status" value="success">
+
+                                        <button type="submit" class="btn btn-success">Подключить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

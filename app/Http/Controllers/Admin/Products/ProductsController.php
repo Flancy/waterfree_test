@@ -61,6 +61,7 @@ class ProductsController extends Controller
             'liter' => $request->liter,
             'city_id' => $request->city_id,
             'firm_id' => $request->firm_id,
+            'comment' => $request->has('comment') ? $request->input('comment') : NULL,
             'hit' => $request->has('hit') ? $request->input('hit') : NULL,
             'logo' => '/images/logo_products/'.$imageName,
         ];

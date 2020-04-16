@@ -24,7 +24,12 @@
 
                     <div class="tab-content">
                         <div class="tab-pane fade in active show" id="general" name="general" role="tabpanel">
-                            <img src="{{ asset($product->logo) }}" alt="" class="img-fluid">
+                            <img src="{{ asset($product->logo) }}" alt="" class="img-fluid" style="max-height: 130px;">
+
+                            <div class="row">
+                                <div class="col-md-3"><strong>Контакты поставщиков:</strong></div>
+                                <div class="col-md-9"><pre>{{ $product->comment }}</pre></div>
+                            </div>
                         </div>
                     </div>
                 </div>

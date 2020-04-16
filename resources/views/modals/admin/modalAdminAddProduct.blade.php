@@ -50,6 +50,9 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
+                        <textarea type="text" name="comment" placeholder="Контакты поставщиков" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
                         <input type="checkbox" name="hit" value="1"> Хит продаж
                     </div>
                     <div class="col-md-12 text-center">

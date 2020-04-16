@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Products extends Model
 {
     protected $fillable = [
-        'name', 'slug', 'description', 'logo', 'price', 'liter', 'hit', 'city_id', 'firm_id'
+        'name', 'slug', 'description', 'logo', 'price', 'liter', 'comment', 'hit', 'city_id', 'firm_id'
     ];
 
     public function cities()
