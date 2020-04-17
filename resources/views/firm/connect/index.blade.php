@@ -33,13 +33,13 @@
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td><img src="{{ $product->logo }}" class="img-fluid" style="max-height: 100px;"></td>
-                                <td><span class="badge badge-success">Не подключен</span></td>
+                                <td><span class="badge badge-warning">Не подключен</span></td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->liter }} л.</td>
                                 <td>{{ $product->cities->name }}</td>
                                 <td>{{ $product->firms->name }}</td>
                                 <td>
-                                    <form action="{{ route('user.firm.connect.update') }}">
+                                    <form action="{{ route('user.firm.connect.update') }}" method="POST">
                                         @csrf
 
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">

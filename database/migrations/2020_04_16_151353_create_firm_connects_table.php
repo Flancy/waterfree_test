@@ -28,6 +28,8 @@ class CreateFirmConnectsTable extends Migration
             $table->unsignedBigInteger('firm_id');
             $table->foreign('firm_id')->references('id')->on('firms')->onDelete('cascade');
 
+            $table->string('status');
+
             $table->timestamps();
         });
     }

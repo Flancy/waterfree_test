@@ -10,6 +10,8 @@ use Auth;
 use App\Models\CityFirms;
 use App\Models\Products;
 
+use App\Models\User\FirmConnect;
+
 class ConnectController extends Controller
 {
     public function index()
@@ -30,7 +32,11 @@ class ConnectController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
+        $order_success = FirmConnect::create($request->all());
+
+        if(!$order_success) {
+            return redirect()->back()->withErros();
+        }
 
     	return redirect()->back()->with([
     		'message' => 'Данные успешно обновлены!'
