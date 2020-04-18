@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\City;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -45,5 +47,10 @@ class User extends Authenticatable
     public function getPhoneNumber()
     {
         return $this->phone;
+    }
+
+    public function city()
+    {
+        return $this->hasOne(City::class, 'id', 'city_id');
     }
 }

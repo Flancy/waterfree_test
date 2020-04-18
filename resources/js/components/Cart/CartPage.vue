@@ -1,6 +1,17 @@
 <template>
     <div class="container-cart">
         <cart-modal-order :totalPrice="totalPrice" :cities="cities"></cart-modal-order>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-success" role="alert" v-if="status">
+                        Спасибо за заявку! Наш менеджер скоро свяжется с Вами!
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <div class="col-sm-12">
                 <div class="row">
@@ -77,15 +88,20 @@
                     <div class="p-4">
                         <p class="font-italic mb-4">Доставка и дополнительные расходы рассчитываются на основе введенных значений.</p>
                         <ul class="list-unstyled mb-4">
-                            <!--<li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Промежуточный итог</strong><strong>390.00 <i class="fa fa-rub" aria-hidden="true"></i></strong></li>
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Доставка и обработка</strong><strong>10.00 <i class="fa fa-rub" aria-hidden="true"></i></strong></li>
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Налог</strong><strong>0.00 <i class="fa fa-rub" aria-hidden="true"></i></strong></li>-->
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Ваше имя:</strong><strong>{{ auth_user.name }}</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Ваш телефон:</strong><strong>{{ auth_user.phone }}</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Ваш город:</strong><strong>{{ auth_city.name }}</strong></li>
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Итого</strong>
                                 <h5 class="font-weight-bold">{{ totalPrice }} <i class="fa fa-rub" aria-hidden="true"></i></h5>
                             </li>
                         </ul>
-                            <a data-toggle="modal" data-target="#modal-order" class="btn btn-dark rounded-pill py-2 btn-block">Перейти к оформлению заказа</a>
+                        <div class="text-center" v-show="auth == ''">
+                            <a href="/login" class="btn btn-primary">Войдите</a>
+                            <b style="margin: 0 20px;">ИЛИ</b>
+                            <a href="/register" class="btn btn-primary">Зарегистрируйтесь</a>
                         </div>
+                        <!--<a data-toggle="modal" data-target="#modal-order" class="btn btn-dark rounded-pill py-2 btn-block" v-show="auth != ''">Перейти к оформлению заказа</a>-->
+                        <a href="#" class="btn btn-dark rounded-pill py-2 btn-block" v-show="auth != ''" @click.prevent="submitForm">Подтвердить заказать</a>
                     </div>
                 </div>
             </div>
@@ -94,7 +110,16 @@
 </template>
 <script>
 export default {
-    props: ['cities'],
+    props: ['cities', 'auth', 'auth_user', 'auth_city'],
+    data() {
+        return {
+            name: '',
+            phone: '',
+            products: {},
+            city: 0,
+            status: false
+        }
+    },
     computed: {
         totalPrice() {
             let total = 0;
@@ -103,6 +128,12 @@ export default {
             }
             return total.toFixed(2);
         }
+    },
+    mounted() {
+        this.name = this.auth_user.name
+        this.phone = this.auth_user.phone
+        this.city = this.auth_city.id
+        this.products = this.$store.state.cart
     },
     methods: {
         removeFromCart(item) {
@@ -125,6 +156,27 @@ export default {
             item.quantity = count;
             
             this.changeCount(item);
+        },
+        submitForm() {
+            let data = {
+                'name': this.name,
+                'phone': this.phone,
+                'products': this.products,
+                'city': this.city,
+                'totalPrice': this.totalPrice
+            };
+            axios.post('/cart/order/store', data)
+                .then((response) => {
+                    console.log(response.data)
+                    if(response.data.status) {
+                        this.status = true
+
+                        this.$store.commit('removeAllCart')
+                    }
+                })
+                .catch((error) => {
+                    console.log(error.data)
+                })
         }
     }
 }

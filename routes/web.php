@@ -84,6 +84,7 @@ Route::group([
 
 //Корзина
 Route::resource('/cart', 'Cart\CartController');
+Route::post('/cart/order/code', 'Cart\CartController@code')->name('cart.order.code');
 Route::post('/cart/order/store', 'Cart\OrderController@store')->name('cart.order.store');
 
 //Товары
@@ -127,3 +128,5 @@ Route::group([
 			Route::post('/firm/balance', 'Firm\BalanceController@update')->name('firm.balance.update');
 		});
 });
+
+Route::get('/getip', 'Geo\IpUserController@getInfoIp');

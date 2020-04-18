@@ -14,11 +14,13 @@ class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        $user_id = null;
+        $user = Auth::user();
+
+        /*$user_id = null;
 
         if(!Auth::guest()) {
             $user_id = Auth::id();
-        }
+        }*/
 
     	$order_group_id = uniqid();
 
@@ -28,12 +30,14 @@ class OrderController extends Controller
         foreach ($request->products as $product) {
             array_push($orders, [
                 'product_id' => $product['id'],
-                'user_id' => $user_id,
-                'city_id' => $request->city,
+                'user_id' => $user->id,
+                'city_id' => $user->city->id,
                 'status' => Order::STATUS_WAIT,
                 'order_group_id' => $order_group_id,
-                'name' => $request->name,
-                'phone' => $request->phone,
+                'name' => $user->name,
+                'phone' => $user->phone,
+                'quantity' => $product['quantity'],
+                'price' => $product['price'],
                 'created_at' => $date_now,
                 'updated_at' => $date_now
             ]);

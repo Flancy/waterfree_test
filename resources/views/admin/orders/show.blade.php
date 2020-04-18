@@ -26,39 +26,53 @@
                         </div><br />
                     @endif
                     
-                    <input class="form-control" id="searchAdmin" type="text" placeholder="Поиск..">
+                    <div>
+                        <strong>Имя клиента:</strong> <span>{{ $orders->first()->user->name }}</span>
+                    </div>
+                    <div>
+                        <strong>Город клиента:</strong> <span>{{ $orders->first()->city->name }}</span>
+                    </div>
+                    <div>
+                        <strong>Телефон клиента:</strong> <span>{{ $orders->first()->user->phone }}</span>
+                    </div>
+                    <div>
+                        <strong>Дата заказа:</strong> <span>{{ $orders->first()->created_at }}</span>
+                    </div>
 
-                    <div class="table-responsive">
+                        {{ $i = 0; }}
+
+                    <div class="table-responsive mt-3">
                         <table class="table table-hover text-left">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <div class="p-2 px-3 text-uppercase">Товар</div>
-                                    </th>
-                                    <th>
-                                        <div class="py-2 text-uppercase">Цена</div>
-                                    </th>
+                                    <th>Изображение</th>
+                                    <th>Марка</th>
+                                    <th>Цена ед/шт</th>
+                                    <th>Литраж</th>
+                                    <th>Количество</th>
+                                    <th>Общая цена</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($orders as $order)
                                     <tr>
-                                        <td style="width: 40%">
-                                            <img src="{{ $order->product->logo }}" alt="" width="70" class="img-fluid rounded">
-                                            <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">{{ $order->product->name }}</a></h5>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <strong>{{ $order->product->price }} <i class="fa fa-rub" aria-hidden="true"></i></strong>
-                                        </td>
+                                        <td><img src="{{ $order->product->logo }}" class="img-fluid" style="max-height: 100px;"></td>
+                                        <td>{{ $order->product->firms->name }}</td>
+                                        <td>{{ $order->product->price }} <i class="fa fa-rub" aria-hidden="true"></i></td>
+                                        <td>{{ $order->product->liter }} л.</td>
+                                        <td>{{ $order->quantity }}</td>
+                                        <td>{{ $order->product->price * $order->quantity }} <i class="fa fa-rub" aria-hidden="true"></i></td>
                                     </tr>
+
+                                    {{ $i++ }}
                                 @empty
                                     <p>У вас пока нет заказов</p>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
+
+                    div.
                 </div>
 
                 <div class="card-footer">

@@ -30,6 +30,8 @@ class CreateOrdersTable extends Migration
 
             $table->string('name');
             $table->string('phone');
+            $table->string('quantity');
+            $table->string('price');
 
             $table->timestamps();
         });

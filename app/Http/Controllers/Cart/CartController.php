@@ -22,6 +22,11 @@ class CartController extends Controller
         ]);
     }
 
+    public function order(Request $request)
+    {
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

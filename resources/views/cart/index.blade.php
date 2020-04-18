@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container container-cart">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <h2 class="h2">Корзина</h2>
+    <div class="container container-cart">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h2 class="h2">Корзина</h2>
+            </div>
         </div>
     </div>
-</div>
 
-<cart-page :cities="{{ $citiesHeader }}"></cart-page>
+    @if(Auth::check())
+        <cart-page :cities="{{ $citiesHeader }}" auth="{{ Auth::check() }}" :auth_user="{{ Auth::user() }}" :auth_city="{{ Auth::user()->city }}"></cart-page>
+    @else
+        <cart-page :cities="{{ $citiesHeader }}" auth="{{ Auth::check() }}" auth_user="''" :auth_city="''"></cart-page>
+    @endif
 @endsection

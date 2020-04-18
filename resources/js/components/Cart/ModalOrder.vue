@@ -21,16 +21,12 @@
 							<label for="name">Ваше имя:*</label>
 							<input type="text" class="form-control rounded-pill" id="name" placeholder="Имя" v-model.trim="$v.name.$model">
 						</div>
-						<div class="form-group form-group-flex" :class="{ 'form-group--error': $v.city.$error }">
+						<!--<div class="form-group form-group-flex" :class="{ 'form-group--error': $v.city.$error }">
 							<label for="city">Ваш город/район</label>
 							<select class="selectpicker" data-live-search="true" name="city" data-style="btn-secondary" @change="changeSelect($event)">
                                 <option v-for="city in cities" :data-tokens="city.name" :value="city.id">{{ city.name }}</option>
                             </select>
-						</div>
-						<div class="form-group" :class="{ 'form-group--error': $v.code.$error }">
-							<label for="name">Код из СМС:*</label>
-							<input type="text" class="form-control rounded-pill" id="code" placeholder="Код из смс..." v-model.trim="$v.code.$model">
-						</div>
+						</div>-->
 						<div class="form-group text-center">
 							<button type="submit" class="btn btn-primary rounded-pill" :disabled="this.$v.$invalid">Заказать</button>
 						</div>
@@ -52,8 +48,7 @@
 				phone: '',
 				products: {},
 				city: 0,
-				code: '',
-				status: false,
+				status: false
 			}
 		},
 	    mounted() {

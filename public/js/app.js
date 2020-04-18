@@ -2022,8 +2022,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['cities'],
+  props: ['cities', 'auth', 'auth_user', 'auth_city'],
+  data: function data() {
+    return {
+      name: '',
+      phone: '',
+      products: {},
+      city: 0,
+      status: false
+    };
+  },
   computed: {
     totalPrice: function totalPrice() {
       var total = 0;
@@ -2054,6 +2079,12 @@ __webpack_require__.r(__webpack_exports__);
       return total.toFixed(2);
     }
   },
+  mounted: function mounted() {
+    this.name = this.auth_user.name;
+    this.phone = this.auth_user.phone;
+    this.city = this.auth_city.id;
+    this.products = this.$store.state.cart;
+  },
   methods: {
     removeFromCart: function removeFromCart(item) {
       this.$store.commit('removeFromCart', item);
@@ -2071,6 +2102,28 @@ __webpack_require__.r(__webpack_exports__);
       var count = parseInt(item.quantity) + 1;
       item.quantity = count;
       this.changeCount(item);
+    },
+    submitForm: function submitForm() {
+      var _this = this;
+
+      var data = {
+        'name': this.name,
+        'phone': this.phone,
+        'products': this.products,
+        'city': this.city,
+        'totalPrice': this.totalPrice
+      };
+      axios.post('/cart/order/store', data).then(function (response) {
+        console.log(response.data);
+
+        if (response.data.status) {
+          _this.status = true;
+
+          _this.$store.commit('removeAllCart');
+        }
+      })["catch"](function (error) {
+        console.log(error.data);
+      });
     }
   }
 });
@@ -2125,10 +2178,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 var _require = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js"),
     required = _require.required,
     minLength = _require.minLength;
@@ -2141,7 +2190,6 @@ var _require = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modul
       phone: '',
       products: {},
       city: 0,
-      code: '',
       status: false
     };
   },
@@ -39086,6 +39134,27 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-12" }, [
+            _vm.status
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-success",
+                    attrs: { role: "alert" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    Спасибо за заявку! Наш менеджер скоро свяжется с Вами!\n                "
+                    )
+                  ]
+                )
+              : _vm._e()
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "col-sm-12" }, [
           _c("div", { staticClass: "row" }, [
             _c(
@@ -39287,6 +39356,48 @@ var render = function() {
                       },
                       [
                         _c("strong", { staticClass: "text-muted" }, [
+                          _vm._v("Ваше имя:")
+                        ]),
+                        _c("strong", [_vm._v(_vm._s(_vm.auth_user.name))])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass:
+                          "d-flex justify-content-between py-3 border-bottom"
+                      },
+                      [
+                        _c("strong", { staticClass: "text-muted" }, [
+                          _vm._v("Ваш телефон:")
+                        ]),
+                        _c("strong", [_vm._v(_vm._s(_vm.auth_user.phone))])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass:
+                          "d-flex justify-content-between py-3 border-bottom"
+                      },
+                      [
+                        _c("strong", { staticClass: "text-muted" }, [
+                          _vm._v("Ваш город:")
+                        ]),
+                        _c("strong", [_vm._v(_vm._s(_vm.auth_city.name))])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass:
+                          "d-flex justify-content-between py-3 border-bottom"
+                      },
+                      [
+                        _c("strong", { staticClass: "text-muted" }, [
                           _vm._v("Итого")
                         ]),
                         _vm._v(" "),
@@ -39302,15 +39413,64 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.auth == "",
+                          expression: "auth == ''"
+                        }
+                      ],
+                      staticClass: "text-center"
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { href: "/login" }
+                        },
+                        [_vm._v("Войдите")]
+                      ),
+                      _vm._v(" "),
+                      _c("b", { staticStyle: { margin: "0 20px" } }, [
+                        _vm._v("ИЛИ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { href: "/register" }
+                        },
+                        [_vm._v("Зарегистрируйтесь")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "a",
                     {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.auth != "",
+                          expression: "auth != ''"
+                        }
+                      ],
                       staticClass: "btn btn-dark rounded-pill py-2 btn-block",
-                      attrs: {
-                        "data-toggle": "modal",
-                        "data-target": "#modal-order"
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.submitForm($event)
+                        }
                       }
                     },
-                    [_vm._v("Перейти к оформлению заказа")]
+                    [_vm._v("Подтвердить заказать")]
                   )
                 ])
               ])
@@ -39543,94 +39703,6 @@ var render = function() {
                           }
                           _vm.$set(
                             _vm.$v.name,
-                            "$model",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "form-group form-group-flex",
-                    class: { "form-group--error": _vm.$v.city.$error }
-                  },
-                  [
-                    _c("label", { attrs: { for: "city" } }, [
-                      _vm._v("Ваш город/район")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        staticClass: "selectpicker",
-                        attrs: {
-                          "data-live-search": "true",
-                          name: "city",
-                          "data-style": "btn-secondary"
-                        },
-                        on: {
-                          change: function($event) {
-                            return _vm.changeSelect($event)
-                          }
-                        }
-                      },
-                      _vm._l(_vm.cities, function(city) {
-                        return _c(
-                          "option",
-                          {
-                            attrs: { "data-tokens": city.name },
-                            domProps: { value: city.id }
-                          },
-                          [_vm._v(_vm._s(city.name))]
-                        )
-                      }),
-                      0
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "form-group",
-                    class: { "form-group--error": _vm.$v.code.$error }
-                  },
-                  [
-                    _c("label", { attrs: { for: "name" } }, [
-                      _vm._v("Код из СМС:*")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.$v.code.$model,
-                          expression: "$v.code.$model",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control rounded-pill",
-                      attrs: {
-                        type: "text",
-                        id: "code",
-                        placeholder: "Код из смс..."
-                      },
-                      domProps: { value: _vm.$v.code.$model },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.$v.code,
                             "$model",
                             $event.target.value.trim()
                           )
