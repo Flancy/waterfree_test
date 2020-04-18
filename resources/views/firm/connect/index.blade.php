@@ -7,10 +7,53 @@
     		@include('layouts.user.nav_firm')
     	</div>
         <div class="col-md-9">
-            <h2 class="mb-3">Подключение заказов</h2>
-
             @include("partials.errors")
             @include("partials.success")
+
+            <h3 class="mb-3">Подключенные заказы</h3>
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Изображение</th>
+                        <th>Статус подключения</th>
+                        <th>Название</th>
+                        <th>Литраж</th>
+                        <th>Город</th>
+                        <th>Фирма</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($firm_connects as $firm_connect)
+                        <tr>
+                            <td>{{ $firm_connect->product->id }}</td>
+                            <td><img src="{{ $firm_connect->product->logo }}" class="img-fluid" style="max-height: 100px;"></td>
+                            <td><span class="badge badge-success">Подключен</span></td>
+                            <td>{{ $firm_connect->product->name }}</td>
+                            <td>{{ $firm_connect->product->liter }} л.</td>
+                            <td>{{ $firm_connect->product->cities->name }}</td>
+                            <td>{{ $firm_connect->product->firms->name }}</td>
+                            <td>
+                                <form action="{{ route('user.firm.connect.update') }}" method="POST">
+                                    @csrf
+
+                                    <input type="hidden" name="product_id" value="{{ $firm_connect->product->id }}">
+                                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                    <input type="hidden" name="city_id" value="{{ $firm_connect->product->city_id }}">
+                                    <input type="hidden" name="firm_id" value="{{ $firm_connect->product->firm_id }}">
+                                    <input type="hidden" name="status" value="success">
+
+                                    <button type="submit" class="btn btn-success">Отключить</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             <input class="form-control" id="searchAdmin" type="text" placeholder="Поиск..">
 

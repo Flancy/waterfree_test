@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 use Auth;
 
-use App\Models\CityFirms;
 use App\Models\Products;
 
 use App\Models\User\FirmConnect;
@@ -18,15 +17,14 @@ class ConnectController extends Controller
     {
         $user = Auth::user();
 
-        $products = Products::where('city_id', $user->city_id)->get();
-        
-        $collection = collect($products);
+        $firm_connect = FirmConnect::where('user_id', $user->id)->get();
 
-        $unique = $collection->unique('order_group_id');
+        $products = Products::where('city_id', $user->city_id)->get();
 
     	return view('firm.connect.index')->with([
     		'user' => $user,
-            'products' => $unique
+            'products' => $products,
+            'firm_connects' => $firm_connect
     	]);
     }
 
