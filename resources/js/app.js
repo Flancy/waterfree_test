@@ -9,7 +9,7 @@ require('./bootstrap');
 global.bootstrap_select = require('./plugins/bootstrap-select/bootstrap-select.min.js');
 global.bootstrap_select_i81 = require('./plugins/bootstrap-select/i18n/defaults-ru_RU.js');
 global.owl = require('./plugins/owl-carousel/owl.carousel.min.js');
-global.mask = require('./plugins/jquery.maskedinput-master/dist/jquery.maskedinput.min.js');
+global.mask = require('./plugins/jquery.maskedinput-master/src/jquery.maskedinput.js');
 
 window.Vue = require('vue');
 

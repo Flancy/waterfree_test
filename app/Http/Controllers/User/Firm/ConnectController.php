@@ -30,14 +30,30 @@ class ConnectController extends Controller
 
     public function update(Request $request)
     {
-        $order_success = FirmConnect::create($request->all());
+        $request = collect($request->all());
+        $request->forget('_token');
+
+        $order_success = FirmConnect::firstOrCreate($request->all());
 
         if(!$order_success) {
             return redirect()->back()->withErros();
         }
 
     	return redirect()->back()->with([
-    		'message' => 'Данные успешно обновлены!'
+    		'message' => 'Успешно добавлено в список заказов!'
     	]);
+    }
+
+    public function delete($id)
+    {
+        $firm_connect_deleted = FirmConnect::findOrFail($id);
+
+        $firm_connect_deleted->delete();
+
+        if($firm_connect_deleted) {
+            return redirect()->back()->with([
+                'message' => 'Успешно удалено из списка заказов!'
+            ]);
+        }
     }
 }

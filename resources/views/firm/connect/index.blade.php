@@ -23,6 +23,7 @@
                         <th>Литраж</th>
                         <th>Город</th>
                         <th>Фирма</th>
+                        <th>Цена</th>
                         <th>Действия</th>
                     </tr>
                     </thead>
@@ -36,17 +37,12 @@
                             <td>{{ $firm_connect->product->liter }} л.</td>
                             <td>{{ $firm_connect->product->cities->name }}</td>
                             <td>{{ $firm_connect->product->firms->name }}</td>
+                            <td>{{ $firm_connect->product->price }} <i class="fa fa-rub" aria-hidden="true"></i></td>
                             <td>
-                                <form action="{{ route('user.firm.connect.update') }}" method="POST">
+                                <form action="{{ route('user.firm.connect.delete', $firm_connect->id) }}" method="POST">
+                                    @method('delete')
                                     @csrf
-
-                                    <input type="hidden" name="product_id" value="{{ $firm_connect->product->id }}">
-                                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                                    <input type="hidden" name="city_id" value="{{ $firm_connect->product->city_id }}">
-                                    <input type="hidden" name="firm_id" value="{{ $firm_connect->product->firm_id }}">
-                                    <input type="hidden" name="status" value="success">
-
-                                    <button type="submit" class="btn btn-success">Отключить</button>
+                                    <button type="submit" class="btn btn-danger">Отключить</button>
                                 </form>
                             </td>
                         </tr>
@@ -54,6 +50,8 @@
                     </tbody>
                 </table>
             </div>
+
+            <h3 class="mb-3">Подключить заказы</h3>
 
             <input class="form-control" id="searchAdmin" type="text" placeholder="Поиск..">
 
@@ -68,6 +66,7 @@
                             <th>Литраж</th>
                             <th>Город</th>
                             <th>Фирма</th>
+                            <th>Цена</th>
                             <th>Действия</th>
                         </tr>
                     </thead>
@@ -81,6 +80,7 @@
                                 <td>{{ $product->liter }} л.</td>
                                 <td>{{ $product->cities->name }}</td>
                                 <td>{{ $product->firms->name }}</td>
+                                <td>{{ $product->price }} <i class="fa fa-rub" aria-hidden="true"></i></td>
                                 <td>
                                     <form action="{{ route('user.firm.connect.update') }}" method="POST">
                                         @csrf

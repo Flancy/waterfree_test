@@ -8,19 +8,33 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Models\Order;
+use App\Models\User\FirmConnect;
 
 class OrdersController extends Controller
 {
     public function index()
     {
-    	$orders = Order::where('user_id', Auth::id())->get();
+        $user = Auth::user();
 
-    	$collection = collect($orders);
+        $orders = Array();
 
-    	$unique = $collection->unique('order_group_id');
+        $all_order_for_city = Order::where('city_id', $user->city_id)->get();
+
+        $orders_collection = collect($all_order_for_city);
+        $orders_collection = $orders_collection->unique('order_group_id');
+
+    	$firm_connects = FirmConnect::where('user_id', $user->id)->get();
+
+    	foreach($firm_connects as $firm_connect) {
+    	    foreach($orders_collection as $order) {
+    	        if($firm_connect->product_id == $order->product_id) {
+    	            array_push($orders, $order);
+                }
+            }
+        }
 
     	return view('firm.orders.index')->with([
-    		'orders' => $unique,
+    		'orders' => $orders,
     	]);
     }
 

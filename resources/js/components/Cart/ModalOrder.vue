@@ -15,7 +15,7 @@
 					<form @submit.prevent="submitForm()">
 						<div class="form-group" :class="{ 'form-group--error': $v.phone.$error }">
 							<label for="phone">Ваш телефон:*</label>
-							<input type="phone" class="form-control rounded-pill" id="phone" placeholder="Телефон" v-model.trim="$v.phone.$model">
+							<input type="tel" class="form-control rounded-pill" id="phone" placeholder="Телефон" v-model.trim="$v.phone.$model">
 						</div>
 						<div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
 							<label for="name">Ваше имя:*</label>
@@ -26,6 +26,10 @@
 							<select class="selectpicker" data-live-search="true" name="city" data-style="btn-secondary" @change="changeSelect($event)">
                                 <option v-for="city in cities" :data-tokens="city.name" :value="city.id">{{ city.name }}</option>
                             </select>
+						</div>
+						<div class="form-group" :class="{ 'form-group--error': $v.code.$error }">
+							<label for="name">Код из СМС:*</label>
+							<input type="text" class="form-control rounded-pill" id="code" placeholder="Код из смс..." v-model.trim="$v.code.$model">
 						</div>
 						<div class="form-group text-center">
 							<button type="submit" class="btn btn-primary rounded-pill" :disabled="this.$v.$invalid">Заказать</button>
@@ -48,6 +52,7 @@
 				phone: '',
 				products: {},
 				city: 0,
+				code: '',
 				status: false,
 			}
 		},

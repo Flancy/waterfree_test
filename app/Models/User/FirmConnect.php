@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\Products;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 
 class FirmConnect extends Model

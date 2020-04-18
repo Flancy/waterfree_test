@@ -78,8 +78,8 @@ Route::group([
 	//Товары
 	Route::get('/orders', 'Orders\OrdersController@index')->name('orders.index');
 	Route::get('/orders/{order_group_id}', 'Orders\OrdersController@show')->name('orders.show');
-	Route::put('/orders/{order_group_id}', 'Users\OrdersController@update')->name('orders.update');
-	Route::delete('/orders/{order_group_id}', 'Users\OrdersController@destroy')->name('orders.destroy');
+	Route::put('/orders/{order_group_id}', 'Orders\OrdersController@update')->name('orders.update');
+	Route::delete('/orders/{order_group_id}', 'Orders\OrdersController@destroy')->name('orders.destroy');
 });
 
 //Корзина
@@ -120,6 +120,7 @@ Route::group([
 			//Настройки
 			Route::get('/firm/connect', 'Firm\ConnectController@index')->name('firm.connect.index');
 			Route::post('/firm/connect', 'Firm\ConnectController@update')->name('firm.connect.update');
+            Route::delete('/firm/connect/{firm_connect_id}', 'Firm\ConnectController@delete')->name('firm.connect.delete');
 
 			//Баланс
 			Route::get('/firm/balance', 'Firm\BalanceController@index')->name('firm.balance.index');
