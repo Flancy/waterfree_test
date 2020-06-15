@@ -23,7 +23,11 @@
 
 //Navbar
 @import 'layouts/nav/header.styl'
-@import 'layouts/nav/footer.styl'
+
+@import 'layouts/layout-deftaul.styl'
+
+@import 'navigations/header.styl'
+@import 'navigations/footer.styl'
 
 //Аутентификация
 @import 'layouts/auth/auth-form.styl'
@@ -36,6 +40,7 @@
 //Страницы пользователей
 @import 'layouts/user/nav.styl'
 @import 'layouts/user/setting/index.styl'
+@import 'layouts/user/cabinet/index.styl'
 
 //Продукция
 @import 'layouts/products/products.styl'
@@ -43,13 +48,14 @@
 
 //Контакты
 @import 'layouts/contacts/index.styl'
-	
+
 //Admin All
 #searchAdmin
 	margin-bottom 20px
-	
+
 body
 	font-family "Raleway", sans-serif
+	position relative
 	.fab, .fas
 		font-family "FontAwesome"
 		font-style normal
@@ -64,5 +70,12 @@ body
 	.bootstrap-select
 		width 100% !important
 	.btn-primary
-		background-color #35a4dc
-		border-color #35a4dc
+		background-color #22256C
+		border-color #22256C
+	.btn-outline-primary
+		color #22256C
+		border-color #22256C
+		&:hover, &:active
+			color #ffffff
+			background-color #22256C
+			border-color #22256C

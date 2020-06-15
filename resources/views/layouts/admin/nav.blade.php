@@ -5,4 +5,5 @@
 	<a href="{{ route('admin.firms.index') }}" class="btn btn-primary {{ Route::is('admin.firms.index') ? 'active' : '' }}">Фирмы</a>
 	<a href="{{ route('admin.products.index') }}" class="btn btn-primary {{ Route::is('admin.products.index') ? 'active' : '' }}">Товары</a>
 	<a href="{{ route('admin.orders.index') }}" class="btn btn-primary {{ Route::is('admin.orders.index') ? 'active' : '' }}">Заказы</a>
+	<a href="{{ route('admin.promo.index') }}" class="btn btn-primary {{ Route::is('admin.promo.index') ? 'active' : '' }}">Промокоды</a>
 </nav>

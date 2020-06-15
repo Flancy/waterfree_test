@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 use Illuminate\Auth\Events\Registered;
 
+use Cookie;
+
+use ElfSundae\Laravel\Hashid\Facades\Hashid;
+
 use App\User;
 use App\Models\Token;
 
@@ -74,6 +78,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $cookie = Cookie::get('referral');
+
+        $referred_by = $cookie ? Hashid::decode($cookie) : null;
+
         return User::create([
             'name' => $data['name'],
             'activate' => 0,
@@ -82,6 +90,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
             'city_id' => $data['city_id'],
+            'referred_by' => $referred_by[0]
         ]);
     }
 

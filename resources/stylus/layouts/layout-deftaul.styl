@@ -1,0 +1,76 @@
+.app
+    display flex
+    justify-content space-between
+    min-height calc(100vh - 200px)
+    .navigation
+        flex 0 0 96px
+        max-width 96px
+        text-align center
+        box-shadow 0 0 0 transparent
+        transition all 0.3s ease-in-out
+        .navigation-left--header
+            display flex
+            background-color #ffffff
+            height 96px
+            align-items center
+            justify-content center
+            position relative
+            &:after
+                position absolute
+                z-index 100
+                content ' '
+                display block
+                width 100%
+                height 100%
+                top 0
+                left 0
+                cursor pointer
+        &.non-active
+            height 96px
+            box-shadow 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)
+        &.navigation-right
+            border-left 1px solid #E2E2E2
+        .navigation-nav
+            display flex
+            padding 50px 0 20px 0
+            background-color #ffffff
+            height 100%
+            justify-content center
+            list-style none
+            .nav-item
+                width 100%
+                flex 1
+                padding 0
+            .nav-link
+                position relative
+                display flex
+                align-items center
+                justify-content center
+                padding 7px
+                margin-bottom 30px
+                &:after
+                    position absolute
+                    z-index 100
+                    content ' '
+                    display block
+                    width 100%
+                    height 100%
+                    top 0
+                    left 0
+                    cursor pointer
+                &.active
+                    border-left 4px solid #22256C
+    .content-center
+        flex 1
+        max-width 100%
+    .navigation-right
+        .navigation-left--header
+            color transparent
+            overflow hidden
+            .nav-link--ico
+                width 30px
+                height 30px
+        .dropdown-menu.show
+            margin-top -105px
+            &:before
+                display none

@@ -133,7 +133,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-   
+
    'twilio' => [
         'TWILIO_AUTH_TOKEN'  => env('TWILIO_AUTH_TOKEN'),
         'TWILIO_ACCOUNT_SID' => env('TWILIO_ACCOUNT_SID')
@@ -177,6 +177,7 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         Nutnet\LaravelSms\ServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -241,6 +242,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
     ],
 
 ];

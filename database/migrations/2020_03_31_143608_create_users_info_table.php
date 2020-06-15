@@ -14,8 +14,7 @@ class CreateUsersInfoTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->bigInteger('city_id');
         });
     }
 

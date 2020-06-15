@@ -20,14 +20,6 @@
                         <input type="number" name="price" placeholder="Введите цену товара" class="form-control">
                     </div>
                     <div class="form-group col-md-12">
-                        <select class="custom-select form-control" name="liter">
-                            <option selected value="19">19 л</option>
-                            <option value="5">5 л</option>
-                            <option value="1.5">1.5 л</option>
-                            <option value="0.5">0.5 л</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-12">
                         <select class="custom-select form-control" name="city_id" placeholder="Выберите город">
                             @foreach($cities as $city)
                                 <option value="{{ $city->id }}">{{ $city->name }}</option>

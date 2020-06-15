@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'role' => 0,
             'email' => 'flancyk.flancyk@yandex.ru',
             'password' => bcrypt('klon5031'),
-            'phone' => '+7(999)999-99-99',
+            'phone' => '+7(999)-999-99-99',
             'city_id' => 1,
         ]);
 
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             'role' => 2,
             'email' => 'flancyk.flancyk1@yandex.ru',
             'password' => bcrypt('klon5031'),
-            'phone' => '+7(999)999-99-98',
+            'phone' => '+7(999)-999-99-98',
             'city_id' => 1,
         ]);
 
@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
             'email' => 'flancyk.flancyk2@yandex.ru',
             'password' => bcrypt('klon5031'),
-            'phone' => '+7(999)999-99-97',
+            'phone' => '+7(999)-999-99-97',
             'city_id' => 1,
         ]);
     }

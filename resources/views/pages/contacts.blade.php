@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="map-container">
+<div class="map-container" style="margin-bottom: 30px">
     <div id="map"></div>
 </div>
 @endsection

@@ -1,0 +1,57 @@
+.content-center
+    .navbar
+        height 96px
+        .nav-link
+            margin 0 5px
+            position relative
+            transition background-color 0.3s ease-in-out
+            &:after
+                content ""
+                display block
+                position absolute
+                top 0
+                left 0
+                width 100%
+                height 100%
+                cursor pointer
+            &.nav-link_cart
+                display flex
+                width 40px
+                height 40px
+                line-height 1
+                border-radius 50%
+                border 2px solid #22256C
+                background-color transparent
+                padding 0
+                align-items center
+                justify-content center
+                text-decoration none !important
+                .nav-link--ico
+                    display inline-block
+                    width 16px
+                    height 16px
+            &.nav-link_profile
+                display flex
+                width 40px
+                height 40px
+                line-height 1
+                border-radius 50%
+                border 2px solid #bd2e4f
+                background-color #bd2e4f
+                padding 0
+                align-items center
+                justify-content center
+                text-decoration none !important
+                .nav-link--ico
+                    display inline-block
+                    width 16px
+                    height 16px
+            &.nav-link_cart:hover, &.nav-link_cart:active
+                background-color #22256C
+                .nav-link--ico svg path
+                    fill #ffffff
+            &.nav-link_profile:hover, &.nav-link_profile:active
+                background-color transparent
+                .nav-link--ico svg path,
+                .nav-link--ico svg circle
+                    fill #bd2e4f

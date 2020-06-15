@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Geo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Location;
+
 class IpUserController extends Controller
 {
     public static function ipInfo($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
@@ -91,6 +93,6 @@ class IpUserController extends Controller
 
         $ip_info = $this->ipInfo($user_ip);
 
-        return dd($ip_info);
+        return dd($_SERVER);
     }
 }

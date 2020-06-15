@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'activate', 'email', 'password', 'city_id', 'role', 'phone'
+        'name', 'activate', 'email', 'password', 'city_id', 'role', 'phone', 'referred_by'
     ];
 
     /**
@@ -52,5 +52,15 @@ class User extends Authenticatable
     public function city()
     {
         return $this->hasOne(City::class, 'id', 'city_id');
+    }
+
+    public function referrer()
+    {
+        return $this->belongsTo('App\User', 'referred_by');
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany('App\User', 'referred_by');
     }
 }

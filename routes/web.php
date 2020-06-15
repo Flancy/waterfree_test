@@ -33,7 +33,7 @@ Route::get('/pages/contacts', 'HomeController@pageContactsIndex')->name('pages.c
 
 //Административная панель
 Route::group([
-		'middleware' => ['admin', 'web', 'auth'], 
+		'middleware' => ['admin', 'web', 'auth'],
 		'namespace' => 'Admin',
 		'prefix' => 'admin',
 		'as' => 'admin.'
@@ -80,6 +80,8 @@ Route::group([
 	Route::get('/orders/{order_group_id}', 'Orders\OrdersController@show')->name('orders.show');
 	Route::put('/orders/{order_group_id}', 'Orders\OrdersController@update')->name('orders.update');
 	Route::delete('/orders/{order_group_id}', 'Orders\OrdersController@destroy')->name('orders.destroy');
+
+	Route::resource('/promo', 'Promo\PromoController');
 });
 
 //Корзина
@@ -92,13 +94,15 @@ Route::resource('/products', 'Api\ProductsController');
 
 //Пользователь
 Route::group([
-		'middleware' => ['web', 'auth'], 
+		'middleware' => ['web', 'auth'],
 		'namespace' => 'User',
 		'as' => 'user.'
 	], function () {
 		Route::group([
 			'middleware' => ['check_customer']
 		], function () {
+            //Главная
+            Route::get('users', 'HomeController@index')->name('home');
 			//Заказы
 			Route::get('/user/orders', 'OrdersController@index')->name('orders.index');
 			Route::get('/user/orders/{order_group_id}', 'OrdersController@show')->name('orders.show');
@@ -106,6 +110,10 @@ Route::group([
 			//Настройки
 			Route::get('/user/setting', 'SettingController@index')->name('setting.index');
 			Route::post('/user/setting', 'SettingController@update')->name('setting.update');
+
+			//Промокод
+			Route::get('/user/code', 'PromoController@index')->name('code');
+			Route::post('/user/code', 'PromoController@update')->name('code.update');
 		});
 
 		Route::group([

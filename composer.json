@@ -11,6 +11,7 @@
         "php": "^7.2",
         "caouecs/laravel-lang": "~4.0",
         "darryldecode/cart": "^4.0",
+        "elfsundae/laravel-hashid": "^1.4",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",
         "laravel/framework": "^6.2",
@@ -19,6 +20,7 @@
         "nutnet/laravel-sms": "^0.9.0",
         "spatie/laravel-permission": "^3.3",
         "srmklive/paypal": "~1.0",
+        "stevebauman/location": "^5.0",
         "twilio/sdk": "^6.2",
         "zelenin/smsru": "~4"
     },

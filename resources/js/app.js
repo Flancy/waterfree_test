@@ -52,6 +52,7 @@ const app = new Vue({
 
 //Тестовое админка
 jQuery(document).ready(function($) {
+
 	$("input[type='tel']").mask("+7(999)-999-99-99");
 	//Удаление пользователя
 	$('a[href="#modalAdminDeleteUser"]').click(function(event) {

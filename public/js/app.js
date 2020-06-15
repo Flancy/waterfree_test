@@ -58913,9 +58913,9 @@ var store = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kirillflancy/Documents/waterfree/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/kirillflancy/Documents/waterfree/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/kirillflancy/Documents/waterfree/resources/stylus/main.styl */"./resources/stylus/main.styl");
+__webpack_require__(/*! c:\Users\Khubiev\Desktop\Server\OSPanel\domains\waterfree.loc\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! c:\Users\Khubiev\Desktop\Server\OSPanel\domains\waterfree.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! c:\Users\Khubiev\Desktop\Server\OSPanel\domains\waterfree.loc\resources\stylus\main.styl */"./resources/stylus/main.styl");
 
 
 /***/ })

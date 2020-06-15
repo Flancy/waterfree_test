@@ -7,7 +7,8 @@ use Illuminate\Support\Arr;
 
 use Session;
 
-use App\Filters\ProductsFilter;
+use ElfSundae\Laravel\Hashid\Facades\Hashid;
+
 use App\Models\Products;
 use App\Models\City;
 use App\Models\Firms;
@@ -87,5 +88,20 @@ class HomeController extends Controller
     public function pageContactsIndex()
     {
         return view('pages.contacts');
+    }
+
+    public function referral()
+    {
+        return url('/') . '/?referral=' . Hashid::encode(auth()->user()->id);
+    }
+
+    public function referrer()
+    {
+        return auth()->user()->referrer;
+    }
+
+    public function referrals()
+    {
+        return auth()->user()->referrals;
     }
 }

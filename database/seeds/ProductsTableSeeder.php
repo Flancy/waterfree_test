@@ -13,14 +13,14 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         DB::table('products')->insert([
-            'name' => 'Элит-Аквa 1',
-            'slug' => 'elit-akva',
+            'name' => 'Химия',
+            'slug' => 'himiya',
             'description' => 'Описание',
-            'logo' => '/images/product_default.png',
+            'logo' => '/images/logo_products/test_him.png',
             'price' => '190',
-            'liter' => '19',
+            //'liter' => '19',
             'comment' => NULL,
-            'hit' => NULL,
+            'hit' => 1,
             'city_id' => '1',
             'firm_id' => '1'
         ]);

@@ -10,7 +10,7 @@
     </div>
 
     @if(Auth::check())
-        <cart-page :cities="{{ $citiesHeader }}" auth="{{ Auth::check() }}" :auth_user="{{ Auth::user() }}" :auth_city="{{ Auth::user()->city }}"></cart-page>
+        <cart-page :cities="{{ $citiesHeader }}" auth="{{ Auth::check() }}" :auth_user="{{ Auth::user() }}" :auth_city="{{ Auth::user()->city_id }}"></cart-page>
     @else
         <cart-page :cities="{{ $citiesHeader }}" auth="{{ Auth::check() }}" auth_user="''" :auth_city="''"></cart-page>
     @endif

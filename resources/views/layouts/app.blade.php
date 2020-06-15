@@ -18,163 +18,196 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <div class="topbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a id="navbarCity" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                    <span>{{ Session::get('city') ?? 'Выберите город' }}</span>
-                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                </a>
+    <div id="app" class="app">
+        <nav class="navigation navigation-left">
+            <a href="#" class="navigation-left--header">
+                <object type="image/svg+xml" data="{{ asset('images/ico/navigation-left/menu-line.svg') }}">
+                    <img src="{{ asset('images/ico/navigation-left/menu-line.png') }}" class="ïmg-fluid">
+                </object>
+            </a>
+            <ul class="navigation-nav">
+                <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link active">
+                        <object type="image/svg+xml" data="{{ asset('images/ico/navigation-left/link-water.svg') }}">
+                            <img src="{{ asset('images/ico/navigation-left/link-water.png') }}" class="ïmg-fluid">
+                        </object>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarCity">
-                                    @foreach($citiesHeader ?? '' as $city)
-                                        <a class="dropdown-item" href="{{ route('set_citie', $city->name) }}">
-                                            {{ $city->name }}
-                                        </a>
-                                    @endforeach
+        <div class="content-center">
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="{{ asset('images/logo.png') }}" alt="Waterfree" class="img-fluid">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="smallDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Выберите город
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-center dropdown-menu-sm" aria-labelledby="smallDropdown">
+                                        <div class="container">
+                                            <div class="row">
+                                                @foreach ($citiesHeader as $city)
+                                                    <a class="dropdown-item col-sm-6" href="{{ route('set_citie', $city->name) }}">
+                                                        <div class="dropdown-item-content">
+                                                            <p class="dropdown-item-title">
+                                                                {{ $city->name }}
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
+                            @auth
+                                @if (Auth::user()->role === 0)
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.home') }}" class="nav-link">Администрирование</a>
+                                    </li>
+                                @endif
+                            @endauth
+                        </ul>
+
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">О сервисе</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('pages.contacts.index') }}" class="nav-link">Контакты</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('cart.index') }}" class="nav-link nav-link_cart">
+                                    <span class="nav-link--ico">@include('layouts.svg-icons.header-top-add-to-cart')</span>
+                                </a>
+                            </li>
+                            @auth
+                                <li class="nav-item">
+                                    <a href="{{ route('user.home') }}" class="nav-link nav-link_profile">
+                                        <span class="nav-link--ico">@include('layouts.svg-icons.header-top-user-profile')</span>
+                                    </a>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="topbar-social">
-                                <a href="#"><i class="fab fa-vk"></i></a>
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="topbar-phone">
-                                <a href="tel:+7(933)333-34-24"><i class="fab fa-phone"></i> +7(933)333-34-24</a>
-                            </div>
-                            <ul class="navbar-nav topbar-auth">
-                                @guest
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user"></i> {{ __('Вход') }}</a>
-                                    </li>
-                                    @if (Route::has('register'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
-                                        </li>
-                                    @endif
-                                @else
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            {{ Auth::user()->name }} <span class="caret"></span>
-                                        </a>
+                </div>
+            </nav>
 
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            @if(Auth::user()->role === 2)
-                                                <a class="dropdown-item" href="{{ route('user.firm.orders.index') }}">
-                                                    {{ __('Личный кабинет') }}
-                                                </a>
-                                            @elseif(Auth::user()->role === 1)
-                                                <a class="dropdown-item" href="{{ route('user.orders.index') }}">
-                                                    {{ __('Ваши заказы') }}
-                                                </a>
-                                                <a class="dropdown-item" href="{{ route('user.setting.index') }}">
-                                                    {{ __('Личный кабинет') }}
-                                                </a>
-                                            @endif
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
-                                                {{ __('Выход') }}
-                                            </a>
+            <main>
+                @yield('content')
+            </main>
+        </div>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </li>
-                                @endguest
-                            </ul>
+        <nav class="navigation navigation-right non-active">
+            <!-- Authentication Links -->
+            <ul class="navbar-nav">
+                @guest
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdownAuth" class="nav-link dropdown-toggle navigation-left--header" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <object type="image/svg+xml" data="{{ asset('images/ico/navigation-right/login.svg') }}" class="nav-link--ico">
+                                <img src="{{ asset('images/ico/navigation-right/login.png') }}" class="ïmg-fluid">
+                            </object>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownAuth">
+                            <a class="dropdown-item" href="{{ route('login') }}">{{ __('Вход') }}</a>
+
+                            @if (Route::has('register'))
+                                <a class="dropdown-item" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
+                            @endif
                         </div>
+                    </li>
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdownSetting" class="nav-link dropdown-toggle navigation-left--header" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <object type="image/svg+xml" data="{{ asset('images/ico/navigation-right/gear.svg') }}" class="nav-link--ico">
+                                <img src="{{ asset('images/ico/navigation-right/gear.png') }}" class="ïmg-fluid">
+                            </object>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSetting">
+                            <a class="dropdown-item" href="{{ route('user.orders.index') }}">
+                                {{ __('Личный кабинет') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                {{ __('Выйти') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+            </ul>
+        </nav>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2 text-center">
+                    <div class="footer-wrap">
+                        <p class="footer-text-head">О компании</p>
+
+                        <a href="#" class="footer-link">О нас</a>
+                        <a href="#" class="footer-link">Контакты</a>
+                        <a href="#" class="footer-link">Новости</a>
+                    </div>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <div class="footer-wrap">
+                        <p class="footer-text-head">Партнерам</p>
+
+                        <a href="#" class="footer-link">Отдел продаж</a>
+                        <a href="{{ route('register') }}" class="footer-link">Регистрация</a>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <a href="{{ route('home') }}" class="footer-logo">
+                        <img src="{{ asset('images/logo.png') }}" class="ïmg-fluid">
+                    </a>
+                    <p class="footer-copyright">©2017-2020 Waterfree. All Rights Reserved.</p>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <div class="footer-wrap">
+                        <p class="footer-text-head">Покупателям</p>
+
+                        <a href="#" class="footer-link">Вопрос-ответ</a>
+                        <a href="#" class="footer-link">Скидки</a>
+                        <a href="#" class="footer-link">Новости</a>
+                    </div>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <div class="footer-wrap">
+                        <p class="footer-text-head">Сервис</p>
+
+                        <a href="#" class="footer-link">Оставить отзыв</a>
+                        <a href="#" class="footer-link">Пожелание к работе</a>
                     </div>
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-md shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo.png') }}" alt="" class="img-fluid">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    </footer>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a href="{{ route('pages.products.index') }}" class="nav-link">Продукция</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('pages.contacts.index') }}" class="nav-link">Контакты</a>
-                        </li>
-                        @if(Auth::check() && Auth::user()->role == 0)
-                            <li class="nav-item {{ Route::is('admin.home') ? 'active' : '' }}">
-                                <a href="{{ route('admin.home') }}" class="nav-link">Административная панель</a>
-                            </li>
-                        @endif
-                    </ul>
-
-                    <ul class="navbar-nav ml-auto">
-                        <cart-dropdown></cart-dropdown>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main>
-            @yield('content')
-        </main>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <h3 class="h3">О нас</h3>
-
-                        <p class="text-description"><b>WaterFree</b> - это сервис, на котором вы можете найти и заказать воду в вашем городе. Отслеживать заказы, узнавать о скидках и предложениях предприятий</p>
-
-                        <a href="{{ route('login') }}" class="footer-link">Вход для пользователей</a>
-                        <a href="{{ route('login') }}" class="footer-link">Вход для компании</a>
-                    </div>
-                    <div class="col-sm-3">
-                        <h3 class="h3">Контакты</h3>
-
-                        <div class="footer-contact"><span>Телефон:</span> <a href="tel:+7(922)051-71-82">+7 (922) 051-71-82</a></div>
-                        <div class="footer-contact"><span>Email:</span><a href="mailto:water_free@mail.ru">water_free@mail.ru</a></div>
-                        <div class="footer-contact"><span>Режим работы:</span>Пн-Пт с 08:00 до 17:00</div>
-                    </div>
-                    <div class="col-sm-3">
-                        <h3 class="h3">Головной офис</h3>
-                        
-                        <div class="footer-contact"><span>Телефон:</span> <a href="tel:+7(922)051-71-82">+7 (922) 051-71-82</a></div>
-                        <div class="footer-contact"><span>Адрес:</span>г.Черкесск, ул.Алиева, 18</div>
-                        <div class="footer-contact"><span>Режим работы:</span>Пн-Пт с 08:00 до 17:00</div>
-                    </div>
-                    <div class="col-sm-3">
-                        <h3 class="h3">Следуйте за нами</h3>
-
-                        <a href="#" class="footer-link">Мы Вконтакте</a>
-                        <a href="#" class="footer-link">Мы в Facbook</a>
-                        <a href="#" class="footer-link">Мы в Instagram</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
     <script src="https://api-maps.yandex.ru/2.1/?apikey=975e872d-c3c6-4768-9569-dc49e52afa62
 &lang=ru_RU" type="text/javascript"></script>
     <script scr="{{ asset('js/app.js') }}"></script>
