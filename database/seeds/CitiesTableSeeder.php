@@ -14,12 +14,16 @@ class CitiesTableSeeder extends Seeder
     {
         DB::table('cities')->insert([
             'name' => 'Черкесск',
+            'slug' => 'Cherkessk',
             'parent_id' => 0,
         ]);
         DB::table('cities')->insert([
             'name' => 'Ставрополь',
+            'slug' => 'Stavropol',
             'parent_id' => 0,
         ]);
+
+        /*
         DB::table('cities')->insert([
             'name' => 'Краснодар',
             'parent_id' => 0,
@@ -173,5 +177,6 @@ class CitiesTableSeeder extends Seeder
             'name' => 'Санкт-Петербург (Центральный)',
             'parent_id' => 4,
         ]);
+        */
     }
 }

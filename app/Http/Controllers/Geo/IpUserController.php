@@ -93,6 +93,6 @@ class IpUserController extends Controller
 
         $ip_info = $this->ipInfo($user_ip);
 
-        return dd($_SERVER);
+        return dd(Location::get($user_ip));
     }
 }
