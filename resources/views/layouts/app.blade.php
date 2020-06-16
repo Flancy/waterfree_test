@@ -59,21 +59,26 @@
                                         Выберите город
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-center dropdown-menu-sm" aria-labelledby="smallDropdown">
-                                        <div class="container">
-                                            <div class="row">
-                                                @foreach ($citiesHeader as $city)
-                                                    <a class="dropdown-item col-sm-6" href="{{ route('set_citie', $city->name) }}">
-                                                        <div class="dropdown-item-content">
-                                                            <p class="dropdown-item-title">
-                                                                {{ $city->name }}
-                                                            </p>
-                                                        </div>
-                                                    </a>
-                                                @endforeach
-                                            </div>
+                                        <div class="dropdown-item">
+                                            <input type="search" class="form-control search" placeholder="Название города" autofocus="autofocus">
                                         </div>
+                                        <div class="menuItems">
+                                            @foreach ($citiesHeader as $city)
+                                                <a class="dropdown-item" href="{{ route('set_citie', $city->name) }}">
+                                                    <div class="dropdown-item-content">
+                                                        <p class="dropdown-item-title">
+                                                            {{ $city->name }}
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                        <div style="display:none;" class="dropdown-header dropdown_empty">Ничего не найдено</div>
                                     </div>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                            	<a href="#modal-user-city" class="nav-link" data-toggle="modal" data-target="#modal-user-city">Выбрать город</a>
                             </li>
                             @auth
                                 @if (Auth::user()->role === 0)
@@ -207,6 +212,8 @@
             </div>
         </div>
     </footer>
+
+    @include('modals.city')
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=975e872d-c3c6-4768-9569-dc49e52afa62
 &lang=ru_RU" type="text/javascript"></script>

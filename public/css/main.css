@@ -936,6 +936,7 @@ body .bootstrap-select {
 body .btn-primary {
   background-color: #22256c;
   border-color: #22256c;
+  color: #fff !important;
 }
 body .btn-outline-primary {
   color: #22256c;
@@ -946,4 +947,7 @@ body .btn-outline-primary:active {
   color: #fff;
   background-color: #22256c;
   border-color: #22256c;
+}
+body .modal .modal-title h5 {
+  margin-bottom: 0;
 }

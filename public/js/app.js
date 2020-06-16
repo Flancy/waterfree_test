@@ -55069,6 +55069,11 @@ global.owl = __webpack_require__(/*! ./plugins/owl-carousel/owl.carousel.min.js 
 global.mask = __webpack_require__(/*! ./plugins/jquery.maskedinput-master/src/jquery.maskedinput.js */ "./resources/js/plugins/jquery.maskedinput-master/src/jquery.maskedinput.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
+__webpack_require__(/*! ./scripts/user_city.js */ "./resources/js/scripts/user_city.js");
+
+__webpack_require__(/*! ./scripts/city_dropdown.js */ "./resources/js/scripts/city_dropdown.js");
+
+
 Vue.use(vuelidate__WEBPACK_IMPORTED_MODULE_0___default.a);
 /**
  * The following block of code may be used to automatically register your
@@ -58778,6 +58783,104 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   };
   j.csstransitions() && (a.support.transition = new String(f("transition")), a.support.transition.end = i.transition.end[a.support.transition]), j.cssanimations() && (a.support.animation = new String(f("animation")), a.support.animation.end = i.animation.end[a.support.animation]), j.csstransforms() && (a.support.transform = new String(f("transform")), a.support.transform3d = j.csstransforms3d());
 }(window.Zepto || window.jQuery, window, document);
+
+/***/ }),
+
+/***/ "./resources/js/scripts/city_dropdown.js":
+/*!***********************************************!*\
+  !*** ./resources/js/scripts/city_dropdown.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+jQuery(document).ready(function ($) {
+  $('.dropdown').each(function (index, dropdown) {
+    //Find the input search box
+    var search = $(dropdown).find('.search'); //Find every item inside the dropdown
+
+    var items = $(dropdown).find('.dropdown-item-title'); //Capture the event when user types into the search box
+
+    $(search).on('input', function () {
+      console.log($(this).val());
+      filter($(this).val().trim().toLowerCase());
+    }); //For every word entered by the user, check if the symbol starts with that word
+    //If it does show the symbol, else hide it
+
+    function filter(word) {
+      var length = items.length;
+      var collection = [];
+      var hidden = 0;
+
+      for (var i = 0; i < length; i++) {
+        console.log(items[i].innerText.toLowerCase());
+
+        if (items[i].innerText.toLowerCase().includes(word)) {
+          $(items[i]).closest('.dropdown-item').show();
+        } else {
+          $(items[i]).closest('.dropdown-item').hide();
+          hidden++;
+        }
+      } //If all items are hidden, show the empty view
+
+
+      if (hidden === length) {
+        $(dropdown).find('.dropdown_empty').show();
+      } else {
+        $(dropdown).find('.dropdown_empty').hide();
+      }
+    }
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/scripts/user_city.js":
+/*!*******************************************!*\
+  !*** ./resources/js/scripts/user_city.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+jQuery(document).ready(function ($) {
+  var user_city = localStorage.getItem('user_city');
+  var check_user_change_city = localStorage.getItem('user_change_city');
+
+  if (check_user_change_city === null || check_user_change_city === undefined) {
+    $('#modal-user-city').modal('show');
+    axios.get(window.location.origin + '/getip').then(function (res) {
+      axios.get(window.location.origin + '/getCityName/' + res.data.cityName).then(function (res) {
+        user_city = res.data.name;
+        localStorage.setItem('user_city', user_city);
+
+        if (user_city === undefined || user_city === null || user_city === '') {
+          $('#modal-user-city .modal-title').html('');
+        } else {
+          $('#modal-user-city .modal-title').html('Ваш город - <span class="user-city">' + user_city + '</span> ? <a href="#" class="btn btn-primary">Да это мой город</a>');
+          $('#modal-user-city .modal-title .btn').attr('href', window.location.origin + '/set_citie/' + user_city);
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  } else {
+    if (user_city === undefined || user_city === null || user_city === '') {
+      $('#modal-user-city .modal-title').html('');
+    } else {
+      $('#modal-user-city .modal-title').html('Ваш город - <span class="user-city">' + user_city + '</span>');
+      $('#smallDropdown').text(user_city);
+      $('#modal-user-city .modal-title .btn').attr('href', window.location.origin + '/set_citie/' + user_city);
+    }
+  }
+
+  $('.dropdown-menu .dropdown-item .dropdown-item-content .dropdown-item-title, #modal-user-city .modal-body .btn').click(function () {
+    localStorage.setItem('user_city', $(this).text());
+  });
+  $(document).on('click', '.modal-title .btn, .dropdown-menu .dropdown-item .dropdown-item-content .dropdown-item-title, #modal-user-city .modal-body .btn', function () {
+    localStorage.setItem('user_change_city', true);
+  });
+});
 
 /***/ }),
 

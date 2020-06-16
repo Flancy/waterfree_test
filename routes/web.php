@@ -138,3 +138,4 @@ Route::group([
 });
 
 Route::get('/getip', 'Geo\IpUserController@getInfoIp');
+Route::get('/getCityName/{slug}', 'Geo\IpUserController@getCityName');

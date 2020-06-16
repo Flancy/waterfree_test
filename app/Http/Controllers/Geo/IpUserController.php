@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use Location;
 
+use App\Models\City;
+
 class IpUserController extends Controller
 {
     public static function ipInfo($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
@@ -93,6 +95,13 @@ class IpUserController extends Controller
 
         $ip_info = $this->ipInfo($user_ip);
 
-        return dd(Location::get($user_ip));
+        return response()->json(Location::get('62.76.111.43'));
+    }
+
+    public function getCityName($slug)
+    {
+        $city = City::select('name')->where('slug', $slug)->first();
+
+        return response()->json($city);
     }
 }
