@@ -95,7 +95,7 @@ class IpUserController extends Controller
 
         $ip_info = $this->ipInfo($user_ip);
 
-        return response()->json(Location::get('62.76.111.43'));
+        return response()->json(Location::get($user_ip));
     }
 
     public function getCityName($slug)
