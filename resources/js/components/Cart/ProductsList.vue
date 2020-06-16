@@ -66,9 +66,9 @@ export default {
                 this.query += '&liter=' + this.liter
             }
 
-            console.log(this.origin_url + '/products/?'+ this.query + '&page=' + page)
+            console.log('https://myhim.ru/products/?'+ this.query + '&page=' + page)
 
-            axios.get(this.origin_url + '/products/?'+ this.query + '&page=' + page)
+            axios.get('https://myhim.ru/products/?'+ this.query + '&page=' + page)
                 .then(response => {
                     this.products = response.data;
                 });
