@@ -66,7 +66,9 @@ export default {
                 this.query += '&liter=' + this.liter
             }
 
-            axios.get(this.origin_url + '/products/?'+ this.query + '&page=' + page)
+            axios.get('/products/?'+ this.query + '&page=' + page, {
+                baseURL: 'https://myhim.ru'
+            })
                 .then(response => {
                     this.products = response.data;
                     console.log('Здесь ошибка 1', error)

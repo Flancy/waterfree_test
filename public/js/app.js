@@ -2322,7 +2322,9 @@ __webpack_require__.r(__webpack_exports__);
         this.query += '&liter=' + this.liter;
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.origin_url + '/products/?' + this.query + '&page=' + page).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/products/?' + this.query + '&page=' + page, {
+        baseURL: 'https://myhim.ru'
+      }).then(function (response) {
         _this.products = response.data;
         console.log('Здесь ошибка 1', error);
       })["catch"](function (error) {
