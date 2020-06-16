@@ -2322,8 +2322,8 @@ __webpack_require__.r(__webpack_exports__);
         this.query += '&liter=' + this.liter;
       }
 
-      console.log('/products/?' + this.query + '&page=' + page);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/products/?' + this.query + '&page=' + page).then(function (response) {
+      console.log(this.origin_url + '/products/?' + this.query + '&page=' + page);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.origin_url + '/products/?' + this.query + '&page=' + page).then(function (response) {
         _this.products = response.data;
       });
     },
