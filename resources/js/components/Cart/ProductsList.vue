@@ -71,9 +71,9 @@ export default {
             })
                 .then(response => {
                     this.products = response.data;
-                    console.log('Здесь ошибка 1', error)
+                    console.log('Здесь ошибка 1', response)
                 }).
-                catch(error => {
+                catch((error) => {
                     console.log('Здесь ошибка 2', error)
                 });
         },

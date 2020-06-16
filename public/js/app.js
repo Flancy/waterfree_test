@@ -2326,7 +2326,7 @@ __webpack_require__.r(__webpack_exports__);
         baseURL: 'https://myhim.ru'
       }).then(function (response) {
         _this.products = response.data;
-        console.log('Здесь ошибка 1', error);
+        console.log('Здесь ошибка 1', response);
       })["catch"](function (error) {
         console.log('Здесь ошибка 2', error);
       });
