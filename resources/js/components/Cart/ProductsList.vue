@@ -66,11 +66,13 @@ export default {
                 this.query += '&liter=' + this.liter
             }
 
-            console.log('https://myhim.ru/products/?'+ this.query + '&page=' + page)
-
-            axios.get('https://myhim.ru/products/?'+ this.query + '&page=' + page)
+            axios.get(this.origin_url + '/products/?'+ this.query + '&page=' + page)
                 .then(response => {
                     this.products = response.data;
+                    console.log('Здесь ошибка 1', error)
+                }).
+                catch(error => {
+                    console.log('Здесь ошибка 2', error)
                 });
         },
         addToCart(product, event) {
