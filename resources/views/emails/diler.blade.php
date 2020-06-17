@@ -23,7 +23,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-	<table>
+	<table class="table table-bordered">
 		<tr>
 			<td><b>ФИО:</b></td>
 			<td>{{ $request->name ?? '' }}</td>
