@@ -55,6 +55,16 @@ const app = new Vue({
 
 //Тестовое админка
 jQuery(document).ready(function($) {
+	$('.app .navigation .navigation-left--header').click(function () {
+		if($(this).hasClass('active')) {
+			$(this).removeClass('active');
+			$('.app .navigation .navigation-nav').removeClass('active');
+		} else {
+			$(this).addClass('active');
+			$('.app .navigation .navigation-nav').addClass('active');
+		}
+	});
+
 	$("input[type='tel']").mask("+7(999)-999-99-99");
 	//Удаление пользователя
 	$('a[href="#modalAdminDeleteUser"]').click(function(event) {
