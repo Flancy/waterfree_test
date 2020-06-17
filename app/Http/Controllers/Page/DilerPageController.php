@@ -21,7 +21,7 @@ class DilerPageController extends Controller
     {
     	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new DilerMail($request));
 
-    	if(!$promo) {
+    	if(!$mail) {
             return redirect()->back()
                 ->withErrors('Ошибка отправки!');
         }
