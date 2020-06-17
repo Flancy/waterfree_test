@@ -20,7 +20,7 @@
 					@include('partials.errors')
 					@include('partials.success')
 
-					<form action="{{ route('pages.diler.mail') }}" class="form" method="POST">
+					<form action="{{ route('pages.review.mail') }}" class="form" method="POST">
 						@csrf
 						<div class="form-group">
 							<label for="name">Как к Вам обращаться (ФИО):*</label>

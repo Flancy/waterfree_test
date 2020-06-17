@@ -38,6 +38,9 @@ Route::post('/pages/diler', 'Page\DilerPageController@mail')->name('pages.diler.
 
 Route::get('/pages/promo', 'Page\PromoPageController@index')->name('pages.promo.index');
 
+Route::get('/pages/review', 'Page\ReviewPageController@index')->name('pages.review.index');
+Route::post('/pages/review', 'Page\ReviewPageController@mail')->name('pages.review.mail');
+
 //Административная панель
 Route::group([
 		'middleware' => ['admin', 'web', 'auth'],
