@@ -19,7 +19,7 @@ class ReviewPageController extends Controller
 
     public function mail(ReviewMailRequest $request)
     {
-    	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new ReviewMail($request))->subject('MYHIM.RU - Мнение о сайте!');
+    	$mail = Mail::to('flancyk.flancyk@yandex.ru')->subject('MYHIM.RU - Мнение о сайте!')->send(new ReviewMail($request));
 
         return redirect()->back()
             ->withSuccess('Спасибо за заявку! Наш менеджер скоро свяжется с Вами!');
