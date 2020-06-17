@@ -36,6 +36,8 @@ Route::get('/pages/service', 'HomeController@pageServiceIndex')->name('pages.ser
 Route::get('/pages/diler', 'Page\DilerPageController@index')->name('pages.diler.index');
 Route::post('/pages/diler', 'Page\DilerPageController@mail')->name('pages.diler.mail');
 
+Route::get('/pages/promo', 'Page\PromoPageController@index')->name('pages.promo.index');
+
 //Административная панель
 Route::group([
 		'middleware' => ['admin', 'web', 'auth'],

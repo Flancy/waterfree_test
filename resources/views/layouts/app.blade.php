@@ -195,9 +195,7 @@
                     <div class="footer-wrap">
                         <p class="footer-text-head">Покупателям</p>
 
-                        <a href="#" class="footer-link">Вопрос-ответ</a>
-                        <a href="#" class="footer-link">Скидки</a>
-                        <a href="#" class="footer-link">Новости</a>
+                        <a href="{{ route('pages.promo.index') }}" class="footer-link">Промокоды</a>
                     </div>
                 </div>
                 <div class="col-sm-2 text-center">
