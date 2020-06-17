@@ -11,4 +11,12 @@ class PromoPageController extends Controller
     {
     	return view('pages.promo');
     }
+    
+    public function mail(DilerMailRequest $request)
+    {
+    	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new DilerMail($request))->subject('MYHIM.RU - Заявка от дилера!');
+
+        return redirect()->back()
+            ->withSuccess('Спасибо за заявку! Наш менеджер скоро свяжется с Вами!');
+    }
 }

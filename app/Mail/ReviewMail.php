@@ -7,9 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-use App\Http\Requests\Mail\DilerMailRequest;
+use App\Http\Requests\Mail\ReviewMailRequest;
 
-class DilerMail extends Mailable
+class ReviewMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +19,7 @@ class DilerMail extends Mailable
      *
      * @return void
      */
-    public function __construct(DilerMailRequest $request)
+    public function __construct(ReviewMailRequest $request)
     {
         $this->request = $request;
     }
@@ -32,7 +32,7 @@ class DilerMail extends Mailable
     public function build()
     {
         return $this->from('admin@myhim.ru')
-            ->view('emails.diler')
+            ->view('emails.review')
             ->with([
                 'request' => $this->request
             ]);
