@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    @if(env('prodaction'))
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    @endif
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Waterfree') }}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/ico">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -77,9 +80,6 @@
                                         <div style="display:none;" class="dropdown-header dropdown_empty">Ничего не найдено</div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                            	<a href="#modal-user-city" class="nav-link" data-toggle="modal" data-target="#modal-user-city">Выбрать город</a>
                             </li>
                             @auth
                                 @if (Auth::user()->role === 0)
@@ -174,24 +174,22 @@
                     <div class="footer-wrap">
                         <p class="footer-text-head">О компании</p>
 
-                        <a href="#" class="footer-link">О нас</a>
-                        <a href="#" class="footer-link">Контакты</a>
-                        <a href="#" class="footer-link">Новости</a>
+                        <a href="{{ route('pages.service.index') }}" class="footer-link">О нас</a>
+                        <a href="{{ route('pages.contacts.index') }}" class="footer-link">Контакты</a>
                     </div>
                 </div>
                 <div class="col-sm-2 text-center">
                     <div class="footer-wrap">
-                        <p class="footer-text-head">Партнерам</p>
+                        <p class="footer-text-head">Дилерам</p>
 
-                        <a href="#" class="footer-link">Отдел продаж</a>
-                        <a href="{{ route('register') }}" class="footer-link">Регистрация</a>
+                        <a href="{{ route('pages.diler.index') }}" class="footer-link">Оставить заявку</a>
                     </div>
                 </div>
                 <div class="col-sm-4 text-center">
                     <a href="{{ route('home') }}" class="footer-logo">
                         <img src="{{ asset('images/logo.png') }}" class="ïmg-fluid">
                     </a>
-                    <p class="footer-copyright">©2017-2020 Waterfree. All Rights Reserved.</p>
+                    <p class="footer-copyright">©2019-2020 MyHim. All Rights Reserved.</p>
                 </div>
                 <div class="col-sm-2 text-center">
                     <div class="footer-wrap">

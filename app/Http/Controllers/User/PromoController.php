@@ -25,27 +25,26 @@ class PromoController extends Controller
    	{
    		$promo = Promo::where('code', $request->code)->first();
 
-		if($promo === null) {
-			return redirect()->route('user.code')->with([
-				'message' => '<h5 style="margin-bottom: 0">Вам повезет в следующий раз!</h5>'
-			]);
-		}
+    		if($promo === null) {
+    			return redirect()->route('user.code')->with([
+    				'message' => '<h5 style="margin-bottom: 0">Вам повезет в следующий раз!</h5>'
+    			]);
+    		}
 
-		$promo->user_id = Auth::id();
-		$promo->status = true;
+    		$promo->user_id = Auth::id();
+    		$promo->status = true;
 
-		$promo->update();
+    		$promo->update();
+            if(!$promo) {
+                return redirect()->route('user.code')->with([
+    				'message' => '<h5 style="margin-bottom: 0">Вам повезет в следующий раз!</h5>'
+    			]);
+            }
 
-        if(!$promo) {
-            return redirect()->route('user.code')->with([
-				'message' => '<h5 style="margin-bottom: 0">Вам повезет в следующий раз!</h5>'
-			]);
-        }
-
-        if($promo->prize == '') {
-	        return redirect()->route('user.code')->with([
-				'message' => '<h5 style="margin-bottom: 0">Вам повезет в следующий раз!</h5>'
-			]);
+            if($promo->prize == '') {
+    	        return redirect()->route('user.code')->with([
+    				'message' => '<h5 style="margin-bottom: 0">Вам повезет в следующий раз!</h5>'
+    			]);
         }
 
         return redirect()->route('user.code')->with([

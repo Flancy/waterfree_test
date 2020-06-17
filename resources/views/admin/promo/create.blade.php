@@ -20,6 +20,11 @@
                         <input type="hidden" name="status" value="false">
 
                         <div class="form-group">
+                            <label for="count">Количество*:</label>
+                            <input type="number" name="count" placeholder="Введите количество" class="form-control" id="count">
+                        </div>
+
+                        <div class="form-group">
                             <label for="code">Код*:</label>
                             <input type="text" name="code" placeholder="Введите код" class="form-control" id="code" value="{{ $code }}">
                         </div>

@@ -90,7 +90,7 @@ class HomeController extends Controller
         return view('pages.contacts');
     }
 
-    public function pageContactsIndex()
+    public function pageServiceIndex()
     {
         return view('pages.service');
     }

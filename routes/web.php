@@ -31,7 +31,10 @@ Route::get('/pages/products', 'HomeController@pageProductIndex')->name('pages.pr
 
 Route::get('/pages/contacts', 'HomeController@pageContactsIndex')->name('pages.contacts.index');
 
-Route::get('/pages/service', 'HomeController@pageServicesIndex')->name('pages.service.index');
+Route::get('/pages/service', 'HomeController@pageServiceIndex')->name('pages.service.index');
+
+Route::get('/pages/diler', 'Page\DilerPageController@index')->name('pages.diler.index');
+Route::post('/pages/diler', 'Page\DilerPageController@mail')->name('pages.diler.mail');
 
 //Административная панель
 Route::group([

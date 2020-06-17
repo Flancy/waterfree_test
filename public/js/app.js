@@ -2322,9 +2322,7 @@ __webpack_require__.r(__webpack_exports__);
         this.query += '&liter=' + this.liter;
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/products/?' + this.query + '&page=' + page, {
-        baseURL: 'https://myhim.ru'
-      }).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(window.location.origin + '/products/?' + this.query + '&page=' + page).then(function (response) {
         _this.products = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -55269,22 +55267,27 @@ function init() {
   });
   myMap.behaviors.disable('scrollZoom');
   myMap.geoObjects.add(new ymaps.Placemark([59.975179, 30.305626], {
-    balloonContent: '<strong>Waterfree</strong><br>Санкт-Петербург</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+    balloonContent: '<strong>MYHIM.RU</strong><br>Санкт-Петербург</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
   }, {
     preset: 'islands#icon',
     iconColor: '#0095b6'
   })).add(new ymaps.Placemark([45.035470, 38.975313], {
-    balloonContent: '<strong>Waterfree</strong><br>Краснодар</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+    balloonContent: '<strong>MYHIM.RU</strong><br>Краснодар</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
   }, {
     preset: 'islands#icon',
     iconColor: '#0095b6'
   })).add(new ymaps.Placemark([45.043330, 41.969101], {
-    balloonContent: '<strong>Waterfree</strong><br>Ставрополь</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+    balloonContent: '<strong>MYHIM.RU</strong><br>Ставрополь</b><br><strong>Телефон:</strong>+7 (962) 455-00-00'
   }, {
     preset: 'islands#icon',
     iconColor: '#0095b6'
   })).add(new ymaps.Placemark([44.228374, 42.048270], {
-    balloonContent: '<strong>Waterfree</strong><br>Черкесск</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+    balloonContent: '<strong>MYHIM.RU</strong><br>Черкесск</b><br><strong>Телефон:</strong>+7 (922) 051-71-82'
+  }, {
+    preset: 'islands#icon',
+    iconColor: '#0095b6'
+  })).add(new ymaps.Placemark([43.735426, 44.653887], {
+    balloonContent: '<strong>MYHIM.RU</strong><br>Моздок</b><br><strong>Телефон:</strong>+7 (928) 074-08-88'
   }, {
     preset: 'islands#icon',
     iconColor: '#0095b6'

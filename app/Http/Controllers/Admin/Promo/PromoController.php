@@ -45,7 +45,23 @@ class PromoController extends Controller
      */
     public function store(PromoCreateRequest $request)
     {
-        $promo = Promo::create($request->all());
+        $promo = null;
+
+        $request_new = $request->all();
+
+        $request_new['code'] = $request->code;
+
+        if($request->count !== null || $request->count > 1) {
+            for ($i=0; $i < $request_new['count']; $i++) {
+                $code = $this->quickRandom();
+
+                $request_new['code'] = $code;
+
+                $promo = Promo::create($request_new);
+            }
+        } else {
+            $promo = Promo::create($request_new);
+        }
 
         if(!$promo) {
             return redirect()->route('admin.promo.create')

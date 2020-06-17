@@ -33,11 +33,11 @@
                                         <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">{{ $order->product->name }}</a></h5>
                                     </div>
                                 </td>
-                                <td>
-                                    {{ $order->product->count() }}
+                                <td class="align-middle">
+                                    <strong>{{ $order->quantity }}</strong>
                                 </td>
                                 <td class="align-middle">
-                                    <strong>{{ $order->product->price }} <i class="fa fa-rub" aria-hidden="true"></i></strong>
+                                    <strong>{{ $order->price * $order->quantity }} <i class="fa fa-rub" aria-hidden="true"></i></strong>
                                 </td>
                             </tr>
                         @empty
