@@ -20,11 +20,6 @@ class DilerPageController extends Controller
     public function mail(DilerMailRequest $request)
     {
     	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new DilerMail($request));
-        
-    	if(!$mail) {
-            return redirect()->back()
-                ->withErrors('Ошибка отправки!');
-        }
 
         return redirect()->back()
             ->withSuccess('Спасибо за заявку! Наш менеджер скоро свяжется с Вами!');
