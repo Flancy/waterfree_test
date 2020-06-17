@@ -31,7 +31,7 @@
 		<div class="col-sm-3">
 			<img src="{{ asset('images/ico/service/building.svg') }}" alt="" class="service-advantage--ico">
 
-			<h4 class="h4">1000+ городов</h4>
+			<h4 class="h4">100+ городов</h4>
 		</div>
 		<div class="col-sm-3">
 			<img src="{{ asset('images/ico/service/star.svg') }}" alt="" class="service-advantage--ico">
