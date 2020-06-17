@@ -202,8 +202,8 @@
                     <div class="footer-wrap">
                         <p class="footer-text-head">Сервис</p>
 
-                        <a href="#" class="footer-link">Оставить отзыв</a>
-                        <a href="#" class="footer-link">Пожелание к работе</a>
+                        <a href="{{ route('pages.review.index') }}" class="footer-link">Оставить отзыв</a>
+                        <a href="{{ route('pages.review.index') }}" class="footer-link">Пожелание к работе</a>
                     </div>
                 </div>
             </div>
