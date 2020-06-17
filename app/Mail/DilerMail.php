@@ -32,6 +32,7 @@ class DilerMail extends Mailable
     public function build()
     {
         return $this->from('admin@myhim.ru')
+            ->subject('MYHIM.RU - Заявка от дилера!')
             ->view('emails.diler')
             ->with([
                 'request' => $this->request

@@ -32,6 +32,7 @@ class ReviewMail extends Mailable
     public function build()
     {
         return $this->from('admin@myhim.ru')
+            ->subject('MYHIM.RU - Мнение о сайте!')
             ->view('emails.review')
             ->with([
                 'request' => $this->request
