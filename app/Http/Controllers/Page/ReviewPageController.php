@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Page;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Mail;
+
 use App\Http\Requests\Mail\ReviewMailRequest;
 use App\Mail\ReviewMail;
 
