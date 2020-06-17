@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Mail;
 
 use App\Mail\DilerMail;
+use App\Http\Requests\Mail\DilerMailRequest;
 
 class DilerPageController extends Controller
 {
@@ -16,9 +17,9 @@ class DilerPageController extends Controller
     	return view('pages.diler');
     }
 
-    public function mail(Request $request)
+    public function mail(DilerMailRequest $request)
     {
-    	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new DilerMail($request));
+    	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new DilerMail($->all()));
 
     	if(!$promo) {
             return redirect()->back()
