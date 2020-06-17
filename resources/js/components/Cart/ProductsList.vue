@@ -71,10 +71,9 @@ export default {
             })
                 .then(response => {
                     this.products = response.data;
-                    console.log('Здесь ошибка 1', response)
                 }).
                 catch((error) => {
-                    console.log('Здесь ошибка 2', error)
+                    console.log(error)
                 });
         },
         addToCart(product, event) {

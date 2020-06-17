@@ -93,7 +93,7 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">О сервисе</a>
+                                <a href="{{ route('pages.service.index') }}" class="nav-link">О сервисе</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('pages.contacts.index') }}" class="nav-link">Контакты</a>

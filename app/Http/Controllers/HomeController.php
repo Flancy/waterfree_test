@@ -90,6 +90,11 @@ class HomeController extends Controller
         return view('pages.contacts');
     }
 
+    public function pageContactsIndex()
+    {
+        return view('pages.service');
+    }
+
     public function referral()
     {
         return url('/') . '/?referral=' . Hashid::encode(auth()->user()->id);

@@ -31,6 +31,8 @@ Route::get('/pages/products', 'HomeController@pageProductIndex')->name('pages.pr
 
 Route::get('/pages/contacts', 'HomeController@pageContactsIndex')->name('pages.contacts.index');
 
+Route::get('/pages/service', 'HomeController@pageServicesIndex')->name('pages.service.index');
+
 //Административная панель
 Route::group([
 		'middleware' => ['admin', 'web', 'auth'],

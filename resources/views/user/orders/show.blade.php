@@ -17,6 +17,9 @@
                                 <div class="p-2 px-3 text-uppercase">Товар</div>
                             </th>
                             <th>
+                                <div class="py-2 text-uppercase">Количество</div>
+                            </th>
+                            <th>
                                 <div class="py-2 text-uppercase">Цена</div>
                             </th>
                         </tr>
@@ -29,6 +32,9 @@
                                     <div class="ml-3 d-inline-block align-middle">
                                         <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">{{ $order->product->name }}</a></h5>
                                     </div>
+                                </td>
+                                <td>
+                                    {{ $order->product->count() }}
                                 </td>
                                 <td class="align-middle">
                                     <strong>{{ $order->product->price }} <i class="fa fa-rub" aria-hidden="true"></i></strong>
