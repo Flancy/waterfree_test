@@ -19,7 +19,7 @@ class DilerPageController extends Controller
 
     public function mail(DilerMailRequest $request)
     {
-    	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new DilerMail($->all()));
+    	$mail = Mail::to('flancyk.flancyk@yandex.ru')->send(new DilerMail($request->all()));
 
     	if(!$promo) {
             return redirect()->back()
